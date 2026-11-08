@@ -1,0 +1,21 @@
+# kazetový obraz a odvozené snapshoty – copyright (Vortex Software / Costa Panayi)
+sources/tape/*.tzx
+sources/tape/*.tap
+sources/tape/*.zip
+sources/tape/*.z80
+sources/tape/*.sna
+sources/tape/*.bin
+sources/tape/*.rzx
+
+# generované
+build/
+js/
+tools/__pycache__/
+tools/vendor/
+config/config.php
+sources/
+CLAUDE.md
+.claude/
+MILNIKY.md
+ZADANI.md
+*.log

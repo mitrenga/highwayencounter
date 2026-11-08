@@ -1,0 +1,12 @@
+{
+    "standalone": [
+        "vortonPhysics.js",
+        "highwayConvoy.js",
+        "highwayEnemies.js",
+        "highwayObjects.js",
+        "highwayEnding.js",
+        "highwayCadence.js",
+        "gameWorker.js",
+        "svision/js/audio/worker/audioProcessor.js"
+    ]
+}
