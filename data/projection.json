@@ -1,0 +1,149 @@
+{
+  "note": "izometrická projekce a řazení do hloubky, odměřené na běžícím originálu (tools/dumpproj.py); ověřené proti tomu, co má hra sama v paměti – adresa spritu, fáze posunu i pořadí kreslení",
+  "source": "režim demo, 1217 průchodů, 31 zón",
+  "buffer": {
+    "at": "$E900",
+    "rowBytes": 32,
+    "rows": 152
+  },
+  "projection": {
+    "distance": "d = y − w($8F09), objekt se kreslí jen pro 0 ≤ d ≤ 255",
+    "row": "řádek = 158 − ((d + x) >> 1)",
+    "pixel": "px = d − x + 24",
+    "column": "sloupec = px >> 3",
+    "shift": "posun = px & 6 – lichý pixel hra zahodí; fáze v záznamu (+9) = 2 × posun, tedy 0, 4, 8, 12",
+    "rowConst": 158,
+    "colConst": 24,
+    "slope": "2 : 1 – krok 1 v x je 1 px vodorovně a půl řádky svisle"
+  },
+  "depth": {
+    "key": "klíč = (d >> 1) + (x >> 1) + 1",
+    "row": "klíč půlí x a d každé zvlášť (`SRL`/`SRL`/`ADD` na $9892), řádek půlí jejich součet – když jsou obě lichá, liší se o jednu řádku",
+    "list": {
+      "at": "$8D52",
+      "entry": "klíč, adresa záznamu (3 B)",
+      "order": "klíč klesá, kreslí se v pořadí seznamu (odzadu dopředu), nula seznam ukončuje"
+    },
+    "skip": {
+      "x": "$FE vynechat, $FF ukončit tabulku",
+      "field6": [
+        "$16",
+        "$19"
+      ]
+    }
+  },
+  "sprite": {
+    "index": "bajtový posun do tabulky $7A00 = (($8F00 + druh) + záznam[+5]) AND $FF; rámec je slovo, které tam leží (data/spriteframes.json)",
+    "animation": {
+      "$0D": {
+        "values": [
+          0
+        ],
+        "holdPasses": null,
+        "pattern": "cycle",
+        "patternNote": "jde v kruhu a přeteče na nulu",
+        "step": 2,
+        "top": 0
+      },
+      "$0E": {
+        "values": [
+          0
+        ],
+        "holdPasses": null,
+        "pattern": "cycle",
+        "patternNote": "jde v kruhu a přeteče na nulu",
+        "step": 2,
+        "top": 0
+      },
+      "$0F": {
+        "values": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "holdPasses": 4,
+        "pattern": "pingpong",
+        "patternNote": "kmitá tam a zpět",
+        "step": 2,
+        "top": 6
+      },
+      "$10": {
+        "values": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "holdPasses": 3,
+        "pattern": "pingpong",
+        "patternNote": "kmitá tam a zpět",
+        "step": 2,
+        "top": 6
+      },
+      "$11": {
+        "values": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "holdPasses": 4,
+        "pattern": "cycle",
+        "patternNote": "jde v kruhu a přeteče na nulu",
+        "step": 2,
+        "top": 6
+      },
+      "$12": {
+        "values": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "holdPasses": 3,
+        "pattern": "cycle",
+        "patternNote": "jde v kruhu a přeteče na nulu",
+        "step": 2,
+        "top": 6
+      },
+      "$13": {
+        "values": [
+          0,
+          2
+        ],
+        "holdPasses": 1,
+        "pattern": "pingpong",
+        "patternNote": "kmitá tam a zpět",
+        "step": 2,
+        "top": 2
+      }
+    },
+    "animationNote": "animační bajt druhu; u řízeného Vortona ($0E) to není animace, ale 2 × směr – tedy osm natočení, změřeno na otáčení",
+    "controlledVorton": "$8F0E = 2 × směr",
+    "shotSlots": {
+      "8": {
+        "kind": "$11",
+        "field5": 24
+      },
+      "7": {
+        "kind": "$12",
+        "field5": 24
+      },
+      "6": {
+        "kind": "$11",
+        "field5": 24
+      }
+    }
+  },
+  "verified": {
+    "passes": 1217,
+    "zones": 31,
+    "records": 8960,
+    "lists": 1217,
+    "keys": 8960,
+    "addresses": 8960,
+    "phases": 8960,
+    "differences": 0
+  }
+}

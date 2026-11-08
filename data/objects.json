@@ -1,0 +1,706 @@
+{
+ "note": "Pravidla silnice odměřená na běžícím originálu (tools/dumpobjects.py). Souřadnice jsou v půljednotkách světové souřadnice, jeden krok je jeden průchod hlavní smyčkou hry – stejné jednotky jako data/physics.json.",
+ "source": "tools/dumpobjects.py, build/gameplay.z80",
+ "measuredOn": {
+  "runs": 18,
+  "steps": 7200,
+  "blockingDecisions": 4055
+ },
+ "entityTable": {
+  "address": 35328,
+  "slots": 24,
+  "recordSize": 16,
+  "inactiveX": 200,
+  "classOffset": 5,
+  "note": "druh objektu je slovo z offsetu +5/+6"
+ },
+ "collision": {
+  "box": {
+   "x": 7,
+   "y": 7
+  },
+  "note": "krok se zahodí, když v cílové pozici stojí objekt s |dx| <= box.x a |dy| <= box.y; jediná dvojice, která na naměřených krocích nedělá ani falešný poplach, ani přehlédnutí",
+  "blockingClasses": [
+   2320,
+   4208,
+   6640,
+   6760
+  ],
+  "blockingNote": "druhy, které samy o sobě vysvětlí zahozený krok; co v seznamu není (výstřely, nepřátelé), se dá projet i prostrkat skrz",
+  "transparentClasses": [
+   280
+  ],
+  "pushableClasses": [
+   6760
+  ],
+  "fixedClasses": [
+   6640
+  ],
+  "response": {
+   "$0910": {
+    "hit": 5,
+    "noHit": 4,
+    "moved": 0,
+    "still": 9,
+    "keptSpeed": 0,
+    "lostSpeed": 9
+   },
+   "$1070": {
+    "hit": 20,
+    "noHit": 75,
+    "moved": 17,
+    "still": 78,
+    "keptSpeed": 0,
+    "lostSpeed": 95
+   },
+   "$19F0": {
+    "hit": 0,
+    "noHit": 519,
+    "moved": 0,
+    "still": 519,
+    "keptSpeed": 0,
+    "lostSpeed": 519
+   },
+   "$1A68": {
+    "hit": 107,
+    "noHit": 31,
+    "moved": 97,
+    "still": 41,
+    "keptSpeed": 0,
+    "lostSpeed": 138
+   }
+  },
+  "responseNote": "do čeho se dá strčit, to náraz ohlásí ($8F15 bit 4) a Vortonovi vezme rychlost i časovač plynu; co se strčit nedá (řada napříč silnicí, $19F0), to rychlost sebere taky, ale náraz **neohlásí** ani jednou z 519 naměřených srážek a časovač nechá běžet, takže se do řady dá narážet pořád dokola. Třetí odpověď z M3 – „opřít se a rychlost si nechat\" – se v těchhle bězích nepotvrdila: o konvoj se hráč rychlost pokaždé připravil (keptSpeed 0). Kdy tedy platí, zůstává otevřené (M5).",
+  "transparentNote": "výstřely nikoho neblokují – hráč jimi projíždí",
+  "road": {
+   "minX": 0,
+   "maxX": 72
+  }
+ },
+ "push": {
+  "takesPusherDirection": true,
+  "speedFromPusher": [
+   1,
+   2,
+   4
+  ],
+  "speedAfterOwnStep": {
+   "1->0": 239,
+   "1->1": 1853,
+   "1->2": 11,
+   "1->4": 6,
+   "2->0": 4,
+   "2->1": 194,
+   "2->2": 3,
+   "2->4": 1,
+   "4->0": 1,
+   "4->1": 2,
+   "4->2": 33
+  },
+  "speedAfterOwnStepNote": "kolikrát byl objekt na začátku průchodu v rychlosti A a na konci v B; povedený krok ji půlí, zablokovaný o jiný objekt ji nechá aspoň na 1",
+  "objectClasses": [
+   1608,
+   2656,
+   6136,
+   6640,
+   6760
+  ],
+  "objectClassesHex": [
+   "$0648",
+   "$0A60",
+   "$17F8",
+   "$19F0",
+   "$1A68"
+  ],
+  "decay": "halve",
+  "note": "do čeho se narazí, to převezme směr i rychlost toho, kdo do něj narazil, popojede ještě v tomtéž kroku a rychlost si pak každý krok půlí (4 → 2 → 1 → 0)"
+ },
+ "shot": {
+  "class": 280,
+  "slots": [
+   6,
+   7,
+   8
+  ],
+  "spawnOffsetSteps": 4,
+  "speed": [
+   4
+  ],
+  "phase": [
+   0,
+   4,
+   8,
+   12
+  ],
+  "lifetimeSteps": 22,
+  "slotReloadSteps": 22,
+  "gapSteps": 2,
+  "lifetimeHistogram": {
+   "7": 1,
+   "10": 1,
+   "21": 2,
+   "22": 2,
+   "23": 30,
+   "43": 1,
+   "44": 1,
+   "45": 3,
+   "57": 1,
+   "163": 1,
+   "199": 1,
+   "267": 1,
+   "290": 1
+  },
+  "cadenceSteps": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   38,
+   39,
+   40,
+   42,
+   44,
+   46,
+   47,
+   51,
+   54,
+   55,
+   59,
+   62,
+   68,
+   71,
+   76,
+   125
+  ],
+  "deaths": {
+   "trefil": 165,
+   "mimoSilnici": 193,
+   "dolet": 46
+  },
+  "note": "vzniká 4 kroky před hráčem v jeho směru, letí rychlostí 4 (tedy 8 půljednotek na krok) a zaniká, když do něčeho trefí, když opustí silnici, nebo když mu dojde dolet; do čeho trefí, to strčí stejně jako náraz Vortonem"
+ },
+ "zone": {
+  "length": 176,
+  "fromPlayer": true,
+  "crossings": [
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 348,
+    "zoneTo": 1,
+    "window": 0
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 350,
+    "zoneTo": 1,
+    "window": 0
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 351,
+    "zoneTo": 1,
+    "window": 0
+   },
+   {
+    "playerY": 352,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 529,
+    "zoneTo": 3,
+    "window": 352
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 350,
+    "zoneTo": 1,
+    "window": 0
+   },
+   {
+    "playerY": 352,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 351,
+    "zoneTo": 1,
+    "window": 0
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   },
+   {
+    "playerY": 354,
+    "zoneTo": 2,
+    "window": 176
+   }
+  ],
+  "note": "okno světa (kamera) je zóna, ve které stojí **hráč**: zóna = y // 176, a čte se z pozice, ve které hráč krok začal. Kamera se neposouvá, při přechodu skočí (disasm_notes.md §6), a skočí i zpátky, když hráč hranici přejede nazpátek – změřeno."
+ },
+ "classes": {
+  "$0000": {
+   "seen": 7187,
+   "moved": 3422,
+   "speeds": {
+    "0": 3183,
+    "1": 2664,
+    "2": 1340
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$0080": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$0088": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$0090": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$0098": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00A0": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00A8": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00B0": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00B8": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00C0": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00C8": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00D0": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$00D8": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "128": 1
+   },
+   "kinds": [
+    14
+   ]
+  },
+  "$0118": {
+   "seen": 3695,
+   "moved": 3291,
+   "speeds": {
+    "4": 3695
+   },
+   "kinds": [
+    17,
+    18
+   ]
+  },
+  "$0228": {
+   "seen": 5420,
+   "moved": 5283,
+   "speeds": {
+    "1": 5420
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$0280": {
+   "seen": 1,
+   "moved": 0,
+   "speeds": {
+    "129": 1
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$0288": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$0290": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$0298": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02A0": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02A8": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02B0": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02B8": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02C0": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02C8": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02D0": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$02D8": {
+   "seen": 5,
+   "moved": 0,
+   "speeds": {
+    "129": 5
+   },
+   "kinds": [
+    17
+   ]
+  },
+  "$0648": {
+   "seen": 12014,
+   "moved": 0,
+   "speeds": {
+    "0": 12014
+   },
+   "kinds": [
+    16,
+    18
+   ]
+  },
+  "$0910": {
+   "seen": 7200,
+   "moved": 2610,
+   "speeds": {
+    "0": 4592,
+    "1": 2608
+   },
+   "kinds": [
+    13
+   ]
+  },
+  "$0A60": {
+   "seen": 11674,
+   "moved": 11,
+   "speeds": {
+    "0": 11669,
+    "1": 5
+   },
+   "kinds": [
+    13
+   ]
+  },
+  "$1070": {
+   "seen": 28523,
+   "moved": 10312,
+   "speeds": {
+    "1": 28523
+   },
+   "kinds": [
+    13
+   ]
+  },
+  "$17F8": {
+   "seen": 340,
+   "moved": 0,
+   "speeds": {
+    "0": 340
+   },
+   "kinds": [
+    13
+   ]
+  },
+  "$19F0": {
+   "seen": 8178,
+   "moved": 0,
+   "speeds": {
+    "0": 8178
+   },
+   "kinds": [
+    13
+   ]
+  },
+  "$1A68": {
+   "seen": 43200,
+   "moved": 600,
+   "speeds": {
+    "0": 40844,
+    "1": 2107,
+    "68": 11,
+    "4": 36,
+    "2": 202
+   },
+   "kinds": [
+    13
+   ]
+  }
+ },
+ "open": [
+  "který druh je barel, bedna, skleněná krychle, cihlová zeď nebo mina – rozhodne až grafika (M2)",
+  "odkud se berou objekty při přechodu zóny (tabulka dat silnice, M2)",
+  "pohyb konvoje ($1070, $0910) a nepřátel ($0228) – M5 a M6"
+ ]
+}

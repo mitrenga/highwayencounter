@@ -1,0 +1,225 @@
+{
+ "note": "Živá pole panelu, sejmutá z běžícího originálu (tools/dumppanelfields.py). Číslice se nesázejí písmem – znaková sada hry se zatím nenašla (disasm_notes.md §2) – takže je tu pro každou hodnotu obrázek přímo z videopaměti.",
+ "source": "tools/dumppanelfields.py, build/gameplay.z80 a režim 6 DEMONSTRATION",
+ "panelRow": 19,
+ "zone": {
+  "col": 1,
+  "row": 20,
+  "cols": 4,
+  "rows": 3,
+  "rowInPanel": 1,
+  "values": {
+   "0": "AAAAAAAAP/wAAF/6AABv9gAAcA4AAHAOAABwDgAAcA4AAHAOAABgBgAAQAIAAAAAAABAAgAAYAYAAHAOAABwDgAAcA4AAHAOAABwDgAAcA4AAG/2AABf+gAAP/wAAAAA",
+   "1": "AAAAAAAAAAAAAAACAAAABgAAAA4AAAAOAAAADgAAAA4AAAAOAAAABgAAAAIAAAAAAAAAAgAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAAAGAAAAAgAAAAAAAAAA",
+   "2": "AAAAAAAAP/wAAB/6AAAP9gAAAA4AAAAOAAAADgAAAA4AAAAOAAAABgAAH/oAAD/8AABf+AAAYAAAAHAAAABwAAAAcAAAAHAAAABwAAAAcAAAAG/wAABf+AAAP/wAAAAA",
+   "3": "AAAAAAAAP/wAAB/6AAAP9gAAAA4AAAAOAAAADgAAAA4AAAAOAAAABgAAH/oAAD/8AAAf+gAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAA/2AAAf+gAAP/wAAAAA",
+   "4": "AAAAAAAAAAAAAEACAABgBgAAcA4AAHAOAABwDgAAcA4AAHAOAABgBgAAX/oAAD/8AAAf+gAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAAAGAAAAAgAAAAAAAAAA",
+   "5": "AAAAAAAAP/wAAF/4AABv8AAAcAAAAHAAAABwAAAAcAAAAHAAAABgAAAAX/gAAD/8AAAf+gAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAA/2AAAf+gAAP/wAAAAA",
+   "6": "AAAAAAAAP/wAAF/4AABv8AAAcAAAAHAAAABwAAAAcAAAAHAAAABgAAAAX/gAAD/8AABf+gAAYAYAAHAOAABwDgAAcA4AAHAOAABwDgAAcA4AAG/2AABf+gAAP/wAAAAA",
+   "7": "AAAAAAAAP/wAAB/6AAAP9gAAAA4AAAAOAAAADgAAAA4AAAAOAAAABgAAAAIAAAAAAAAAAgAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAAAGAAAAAgAAAAAAAAAA",
+   "8": "AAAAAAAAP/wAAF/6AABv9gAAcA4AAHAOAABwDgAAcA4AAHAOAABgBgAAX/oAAD/8AABf+gAAYAYAAHAOAABwDgAAcA4AAHAOAABwDgAAcA4AAG/2AABf+gAAP/wAAAAA",
+   "9": "AAAAAAAAP/wAAF/6AABv9gAAcA4AAHAOAABwDgAAcA4AAHAOAABgBgAAX/oAAD/8AAAf+gAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAA/2AAAf+gAAP/wAAAAA",
+   "10": "AAAAAAAAP/wAAl/6AAZv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBgACQAIAAAAAAAJAAgAGYAYADnAOAA5wDgAOcA4ADnAOAA5wDgAOcA4ABm/2AAJf+gAAP/wAAAAA",
+   "11": "AAAAAAAAAAAAAgACAAYABgAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABgACAAIAAAAAAAIAAgAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABgAGAAIAAgAAAAAAAAAA",
+   "12": "AAAAAAAAP/wAAh/6AAYP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABgACH/oAAD/8AAJf+AAGYAAADnAAAA5wAAAOcAAADnAAAA5wAAAOcAAABm/wAAJf+AAAP/wAAAAA",
+   "13": "AAAAAAAAP/wAAh/6AAYP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABgACH/oAAD/8AAIf+gAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABg/2AAIf+gAAP/wAAAAA",
+   "14": "AAAAAAAAAAAAAkACAAZgBgAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBgACX/oAAD/8AAIf+gAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABgAGAAIAAgAAAAAAAAAA",
+   "15": "AAAAAAAAP/wAAl/4AAZv8AAOcAAADnAAAA5wAAAOcAAADnAAAAZgAAACX/gAAD/8AAIf+gAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABg/2AAIf+gAAP/wAAAAA",
+   "16": "AAAAAAAAP/wAAl/4AAZv8AAOcAAADnAAAA5wAAAOcAAADnAAAAZgAAACX/gAAD/8AAJf+gAGYAYADnAOAA5wDgAOcA4ADnAOAA5wDgAOcA4ABm/2AAJf+gAAP/wAAAAA",
+   "17": "AAAAAAAAP/wAAh/6AAYP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABgACAAIAAAAAAAIAAgAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABgAGAAIAAgAAAAAAAAAA",
+   "18": "AAAAAAAAP/wAAl/6AAZv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBgACX/oAAD/8AAJf+gAGYAYADnAOAA5wDgAOcA4ADnAOAA5wDgAOcA4ABm/2AAJf+gAAP/wAAAAA",
+   "19": "AAAAAAAAP/wAAl/6AAZv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBgACX/oAAD/8AAIf+gAGAAYADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ABg/2AAIf+gAAP/wAAAAA",
+   "20": "AAAAAD/8P/wf+l/6D/Zv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBh/6QAI//AAAX/hAAmAAYAZwAHAOcABwDnAAcA5wAHAOcABwDnAAcA5v8G/2X/hf+j/8P/wAAAAA",
+   "21": "AAAAAD/8AAAf+gACD/YABgAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABh/6AAI//AAAX/gAAmAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8AAGX/gAAj/8AAAAAAAA",
+   "22": "AAAAAD/8P/wf+h/6D/YP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABh/6H/o//D/8X/hf+GAAYABwAHAAcABwAHAAcABwAHAAcABwAHAAcABv8G/wX/hf+D/8P/wAAAAA",
+   "23": "AAAAAD/8P/wf+h/6D/YP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABh/6H/o//D/8X/gf+mAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8A/2X/gf+j/8P/wAAAAA",
+   "24": "AAAAAD/8AAAf+kACD/ZgBgAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBh/6X/o//D/8X/gf+mAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8AAGX/gAAj/8AAAAAAAA",
+   "25": "AAAAAD/8P/wf+l/4D/Zv8AAOcAAADnAAAA5wAAAOcAAADnAAAAZgAB/6X/g//D/8X/gf+mAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8A/2X/gf+j/8P/wAAAAA",
+   "26": "AAAAAD/8P/wf+l/4D/Zv8AAOcAAADnAAAA5wAAAOcAAADnAAAAZgAB/6X/g//D/8X/hf+mAAYAZwAHAOcABwDnAAcA5wAHAOcABwDnAAcA5v8G/2X/hf+j/8P/wAAAAA",
+   "27": "AAAAAD/8P/wf+h/6D/YP9gAOAA4ADgAOAA4ADgAOAA4ADgAOAAYABh/6AAI//AAAX/gAAmAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8AAGX/gAAj/8AAAAAAAA",
+   "28": "AAAAAD/8P/wf+l/6D/Zv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBh/6X/o//D/8X/hf+mAAYAZwAHAOcABwDnAAcA5wAHAOcABwDnAAcA5v8G/2X/hf+j/8P/wAAAAA",
+   "29": "AAAAAD/8P/wf+l/6D/Zv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBh/6X/o//D/8X/gf+mAAAAZwAAAOcAAADnAAAA5wAAAOcAAADnAAAA5v8A/2X/gf+j/8P/wAAAAA",
+   "30": "AAAAAD/8P/wf+l/6D/Zv9gAOcA4ADnAOAA5wDgAOcA4ADnAOAAZgBh/6QAI//AAAH/pAAgAGYAYADnAOAA5wDgAOcA4ADnAOAA5wDgAOcA4P9m/2H/pf+j/8P/wAAAAA"
+  },
+  "attributes": "Q0NDQ0NDQ0NDQ0ND",
+  "distinct": 31,
+  "note": "bitmapa pole ZONE pro každou hodnotu, kterou hra ukáže (31 − počítadlo zón, disasm_notes.md §7); vzato z režimu 6 DEMONSTRATION, který si projde všechny zóny sám"
+ },
+ "vortons": {
+  "row": 20,
+  "rowInPanel": 1,
+  "col": 6,
+  "step": 2,
+  "count": 5,
+  "icons": [
+   {
+    "index": 0,
+    "controlled": "AAAAAAEAB8AP4B/gP+g/+A==",
+    "controlledMeasured": true,
+    "waiting": null,
+    "waitingMeasured": false
+   },
+   {
+    "index": 1,
+    "controlled": "AAAAAAEAB8AP4B/gP+g/+A==",
+    "controlledMeasured": true,
+    "waiting": "AAAAAAEABUAKoBVAKqg/+A==",
+    "waitingMeasured": true
+   },
+   {
+    "index": 2,
+    "controlled": "AAAAAAEAB8AP4B/gP+g/+A==",
+    "controlledMeasured": true,
+    "waiting": "AAAAAAEABUAKoBVAKqg/+A==",
+    "waitingMeasured": true
+   },
+   {
+    "index": 3,
+    "controlled": "AAAAAAEAB8AP4B/gP+g/+A==",
+    "controlledMeasured": false,
+    "waiting": "AAAAAAEABUAKoBVAKqg/+A==",
+    "waitingMeasured": true
+   },
+   {
+    "index": 4,
+    "controlled": "AAAAAAEAB8AP4B/gP+g/+A==",
+    "controlledMeasured": false,
+    "waiting": "AAAAAAEABUAKoBVAKqg/+A==",
+    "waitingMeasured": true
+   }
+  ],
+  "sameControlledGlyph": true,
+  "handovers": 17,
+  "marks": [
+   {
+    "seed": 9004,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9006,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9006,
+    "controlledSlot": 2,
+    "filledIcons": [
+     1,
+     2
+    ]
+   },
+   {
+    "seed": 9007,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9007,
+    "controlledSlot": 2,
+    "filledIcons": [
+     1,
+     2
+    ]
+   },
+   {
+    "seed": 9009,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9010,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9013,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9021,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9021,
+    "controlledSlot": 2,
+    "filledIcons": [
+     1,
+     2
+    ]
+   },
+   {
+    "seed": 9024,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9030,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9030,
+    "controlledSlot": 2,
+    "filledIcons": [
+     1,
+     2
+    ]
+   },
+   {
+    "seed": 9039,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9050,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9058,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   },
+   {
+    "seed": 9060,
+    "controlledSlot": 1,
+    "filledIcons": [
+     1
+    ]
+   }
+  ],
+  "note": "řada `1 2 3 4 5` **neubývá**: zánik automatického Vortona na panelu nezmění nic. Vyplněná (tmavá) ikona je ta, jejíhož Vortona hráč řídí, a **zůstane vyplněná i potom** – po převzetí dalšího jsou vyplněné obě. Řada tedy ukazuje, kolikátého Vortona v pořadí hráč už spotřeboval, ne kolik jich zbývá; ZADANI §7 to četlo obráceně."
+ },
+ "open": [
+  "vyplněná ikona pátého (a čtvrtého) Vortona se nenaměřila: ani v jednom z běhů se hráč nedostal tak hluboko, aby ho začal řídit. Bere se ta, která vyšla na všech místech, kam se měření dostalo, bajt po bajtu stejná – jediný dopočet v M5, a je označený (`controlledMeasured`).",
+  "POWER a TIME jsou sloupcové ukazatele – co měří, je M6",
+  "SCORE a HIGH se sázejí číslicemi znakové sady, a ta se zatím nenašla (disasm_notes.md §2)"
+ ]
+}

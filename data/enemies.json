@@ -1,0 +1,1230 @@
+{
+ "note": "Nepřátelé a matice srážek (M6), odměřené na běžícím originálu (tools/dumpenemies.py). Rodina objektu je horní bajt slova druhu bez bitu 4; podle ní se řídí pohyb i to, co se stane při srážce. Souřadnice, směry a jeden krok jsou tytéž jednotky jako v data/physics.json, objects.json a convoy.json: jeden krok je jeden průchod hlavní smyčkou.",
+ "source": "tools/dumpenemies.py, build/gameplay.z80",
+ "measuredOn": {
+  "runs": 9,
+  "steps": 7616,
+  "enemyPasses": 20796,
+  "differences": 1,
+  "zoneLoadPasses": 198,
+  "tableTrimmedPasses": 9,
+  "killedByPlayerPasses": 4,
+  "differencesOnShiftedGenerator": 20
+ },
+ "table": {
+  "start": 35328,
+  "startAddr": "$8A00",
+  "pointer": "$8F01",
+  "emptyX": 254,
+  "endX": 255,
+  "longestSeen": 41,
+  "slots": 48,
+  "note": "tabulka objektů je delší, než měřila §12: prázdné místo má v `x` $FE, konec tabulky $FF, a nejdál se naměřilo 41 záznamů. Začátek tabulky je ukazatel na $8F01 (v naměřených bězích pořád $8A00)."
+ },
+ "familyMask": 239,
+ "enemyFamilies": [
+  2,
+  3,
+  4,
+  5
+ ],
+ "families": [
+  {
+   "index": 0,
+   "b11": [
+    0
+   ],
+   "role": "řízený i automatický Vorton",
+   "classes": [
+    "$0000",
+    "$1070"
+   ],
+   "kinds": [
+    13,
+    14
+   ],
+   "passes": 34598
+  },
+  {
+   "index": 1,
+   "b11": [
+    22
+   ],
+   "role": "výstřel",
+   "classes": [
+    "$0118"
+   ],
+   "kinds": [
+    17,
+    18
+   ],
+   "passes": 3192
+  },
+  {
+   "index": 2,
+   "b11": [
+    44
+   ],
+   "role": "nepřítel, který jede rovně a na překážce si hodí nový směr po 90°",
+   "classes": [
+    "$0228"
+   ],
+   "kinds": [
+    17,
+    18
+   ],
+   "passes": 11013
+  },
+  {
+   "index": 3,
+   "b11": [
+    66
+   ],
+   "role": "nepřítel, který se vrtí a na překážce si hodí kterýkoli směr",
+   "classes": [
+    "$0330",
+    "$1378"
+   ],
+   "kinds": [
+    16,
+    17,
+    18,
+    19
+   ],
+   "passes": 3275
+  },
+  {
+   "index": 4,
+   "b11": [
+    88
+   ],
+   "role": "nepřítel, který si směr tahá z náhody podle své dráhy",
+   "classes": [
+    "$0438"
+   ],
+   "kinds": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "passes": 1840
+  },
+  {
+   "index": 5,
+   "b11": [
+    110
+   ],
+   "role": "mina: jezdí tam a zpátky a výstřel ji nesundá",
+   "classes": [
+    "$0540",
+    "$1528"
+   ],
+   "kinds": [
+    15,
+    16,
+    18
+   ],
+   "passes": 4888
+  },
+  {
+   "index": 6,
+   "b11": [
+    132
+   ],
+   "role": "předmět, kterým nepřátelé i výstřely projdou",
+   "classes": [
+    "$0648"
+   ],
+   "kinds": [
+    15,
+    16,
+    17,
+    18
+   ],
+   "passes": 18123
+  },
+  {
+   "index": 7,
+   "b11": [
+    154
+   ],
+   "role": "předmět, do kterého se dá narážet (řada napříč silnicí)",
+   "classes": [
+    "$0750"
+   ],
+   "kinds": [
+    13
+   ],
+   "passes": 240
+  },
+  {
+   "index": 8,
+   "b11": [
+    176
+   ],
+   "role": "předmět, který po zásahu roztaje",
+   "classes": [
+    "$0858"
+   ],
+   "kinds": [
+    13
+   ],
+   "passes": 760
+  },
+  {
+   "index": 9,
+   "b11": [
+    198
+   ],
+   "role": "Lasertron – a s bitem 4 nepohnutelný předmět, který bere rychlost, ale náraz neohlásí (M4 ho měřila jako $19F0)",
+   "classes": [
+    "$0910"
+   ],
+   "kinds": [
+    13
+   ],
+   "passes": 7625
+  },
+  {
+   "index": 10,
+   "b11": [
+    220
+   ],
+   "role": "předmět, který se dá strčit ($1A68) – a s nulovým bitem 4 jeho nepohnutelná varianta",
+   "classes": [
+    "$0A60",
+    "$1A68"
+   ],
+   "kinds": [
+    13
+   ],
+   "passes": 52642
+  }
+ ],
+ "steps": {
+  "table": "$8E00",
+  "perSpeed": [
+   [
+    {
+     "dx": 0,
+     "dy": 2,
+     "phase": 4,
+     "depth": 65504,
+     "depthWrapped": 65505
+    },
+    {
+     "dx": -1,
+     "dy": 1,
+     "phase": 4,
+     "depth": 0,
+     "depthWrapped": 1
+    },
+    {
+     "dx": -2,
+     "dy": 0,
+     "phase": 4,
+     "depth": 32,
+     "depthWrapped": 33
+    },
+    {
+     "dx": -1,
+     "dy": -1,
+     "phase": 0,
+     "depth": 32,
+     "depthWrapped": 32
+    },
+    {
+     "dx": 0,
+     "dy": -2,
+     "phase": -4,
+     "depth": 32,
+     "depthWrapped": 31
+    },
+    {
+     "dx": 1,
+     "dy": -1,
+     "phase": -4,
+     "depth": 0,
+     "depthWrapped": 65535
+    },
+    {
+     "dx": 2,
+     "dy": 0,
+     "phase": -4,
+     "depth": 65504,
+     "depthWrapped": 65503
+    },
+    {
+     "dx": 1,
+     "dy": 1,
+     "phase": 0,
+     "depth": 65504,
+     "depthWrapped": 65504
+    }
+   ],
+   [
+    {
+     "dx": 0,
+     "dy": 4,
+     "phase": 8,
+     "depth": 65472,
+     "depthWrapped": 65473
+    },
+    {
+     "dx": -2,
+     "dy": 2,
+     "phase": 8,
+     "depth": 0,
+     "depthWrapped": 1
+    },
+    {
+     "dx": -4,
+     "dy": 0,
+     "phase": 8,
+     "depth": 64,
+     "depthWrapped": 65
+    },
+    {
+     "dx": -2,
+     "dy": -2,
+     "phase": 0,
+     "depth": 64,
+     "depthWrapped": 64
+    },
+    {
+     "dx": 0,
+     "dy": -4,
+     "phase": -8,
+     "depth": 64,
+     "depthWrapped": 63
+    },
+    {
+     "dx": 2,
+     "dy": -2,
+     "phase": -8,
+     "depth": 0,
+     "depthWrapped": 65535
+    },
+    {
+     "dx": 4,
+     "dy": 0,
+     "phase": -8,
+     "depth": 65472,
+     "depthWrapped": 65471
+    },
+    {
+     "dx": 2,
+     "dy": 2,
+     "phase": 0,
+     "depth": 65472,
+     "depthWrapped": 65472
+    }
+   ],
+   [
+    {
+     "dx": 0,
+     "dy": 6,
+     "phase": 12,
+     "depth": 65440,
+     "depthWrapped": 65441
+    },
+    {
+     "dx": -3,
+     "dy": 3,
+     "phase": 12,
+     "depth": 0,
+     "depthWrapped": 1
+    },
+    {
+     "dx": -6,
+     "dy": 0,
+     "phase": 12,
+     "depth": 96,
+     "depthWrapped": 97
+    },
+    {
+     "dx": -3,
+     "dy": -3,
+     "phase": 0,
+     "depth": 96,
+     "depthWrapped": 96
+    },
+    {
+     "dx": 0,
+     "dy": -6,
+     "phase": -12,
+     "depth": 96,
+     "depthWrapped": 95
+    },
+    {
+     "dx": 3,
+     "dy": -3,
+     "phase": -12,
+     "depth": 0,
+     "depthWrapped": 65535
+    },
+    {
+     "dx": 6,
+     "dy": 0,
+     "phase": -12,
+     "depth": 65440,
+     "depthWrapped": 65439
+    },
+    {
+     "dx": 3,
+     "dy": 3,
+     "phase": 0,
+     "depth": 65440,
+     "depthWrapped": 65440
+    }
+   ],
+   [
+    {
+     "dx": 0,
+     "dy": 8,
+     "phase": 0,
+     "depth": 65409,
+     "depthWrapped": 65409
+    },
+    {
+     "dx": -4,
+     "dy": 4,
+     "phase": 0,
+     "depth": 1,
+     "depthWrapped": 1
+    },
+    {
+     "dx": -8,
+     "dy": 0,
+     "phase": 0,
+     "depth": 129,
+     "depthWrapped": 129
+    },
+    {
+     "dx": -4,
+     "dy": -4,
+     "phase": 0,
+     "depth": 128,
+     "depthWrapped": 128
+    },
+    {
+     "dx": 0,
+     "dy": -8,
+     "phase": 0,
+     "depth": 127,
+     "depthWrapped": 127
+    },
+    {
+     "dx": 4,
+     "dy": -4,
+     "phase": 0,
+     "depth": 65535,
+     "depthWrapped": 65535
+    },
+    {
+     "dx": 8,
+     "dy": 0,
+     "phase": 0,
+     "depth": 65407,
+     "depthWrapped": 65407
+    },
+    {
+     "dx": 4,
+     "dy": 4,
+     "phase": 0,
+     "depth": 65408,
+     "depthWrapped": 65408
+    }
+   ]
+  ],
+  "note": "tabulka kroku hry: index je směr × 8 + (rychlost−1) × 64. Ke každému směru posun `x`, 16bitový posun `y`, posun fáze animace a dva posuny hloubky – druhý se použije, když fáze přeteče."
+ },
+ "dirMasks": {
+  "table": "$8FF0",
+  "perLane": [
+   {
+    "and": 1,
+    "or": 0
+   },
+   {
+    "and": 1,
+    "or": 4
+   },
+   {
+    "and": 1,
+    "or": 2
+   },
+   {
+    "and": 1,
+    "or": 6
+   },
+   {
+    "and": 3,
+    "or": 0
+   },
+   {
+    "and": 3,
+    "or": 4
+   },
+   {
+    "and": 0,
+    "or": 2
+   },
+   {
+    "and": 0,
+    "or": 6
+   }
+  ],
+  "note": "rodina 4 si směr tahá z generátoru a maskuje ho podle své dráhy (bajt +12): `směr = (náhoda >> 8 & and) | or`. Dráhy 0–3 dávají dvojici směrů, 4–5 čtveřici, 6–7 jediný směr."
+ },
+ "wander": {
+  "left": 245,
+  "right": 10,
+  "note": "rodina 3 si po každém povedeném kroku vytáhne náhodu: dolní bajt ≥ $F5 (11 z 256) otočí o krok vlevo, < $0A (10 z 256) o krok vpravo, jinak jede dál rovně."
+ },
+ "random": {
+  "seed": "$5C76",
+  "mul": 254,
+  "add": 253,
+  "mod": 65537,
+  "drawsHistogram": {
+   "0": 6286,
+   "1": 299,
+   "2": 156,
+   "3": 13,
+   "4": 179,
+   "5": 196,
+   "6": 126,
+   "7": 89,
+   "8": 40,
+   "9": 150,
+   "10": 36,
+   "11": 26,
+   "12": 17,
+   "13": 3
+  },
+  "note": "generátor hry sedí na spectrácké systémové proměnné $5C76 a je to `SEED' = (254 × SEED + 253) mod 65537`. Tahají z něj nepřátelé rodin 2, 3 a 4 – a taky zvuk výbuchu a kreslení, takže sekvenci nedrží samotní nepřátelé; port si proto na začátku každého průchodu bere semínko ze záznamu a matcher to počítá (disasm_notes.md §16)."
+ },
+ "collision": {
+  "matrix": "$9000",
+  "rowStride": 22,
+  "box": {
+   "x": 7,
+   "y": 7
+  },
+  "range": 15,
+  "wallColumn": 7,
+  "handlers": [
+   [
+    "stop",
+    "eatShot",
+    "dieOnEnemy",
+    "dieOnEnemy",
+    "dieOnEnemy",
+    "dieOnEnemy",
+    "dieOnEnemy",
+    "stop",
+    "stop",
+    "pushLasertron",
+    "shove"
+   ],
+   [
+    "shotStopsUnlessPlayer",
+    "passThrough",
+    "shotKillsEnemy",
+    "shotKillsEnemy",
+    "shotKillsEnemy",
+    "shotStopsUnlessPlayer",
+    "passThrough",
+    "shotGone",
+    "shotMelts",
+    "passThrough",
+    "shotShoves"
+   ],
+   [
+    "killVorton",
+    "killedByShot",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir",
+    "randomEvenDir"
+   ],
+   [
+    "killVorton",
+    "killedByShot",
+    "randomDir",
+    "randomDir",
+    "randomDir",
+    "randomDir",
+    "passThrough",
+    "randomDir",
+    "randomDir",
+    "randomDir",
+    "randomDir"
+   ],
+   [
+    "killVorton",
+    "killedByShot",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane",
+    "randomLane"
+   ],
+   [
+    "killVorton",
+    "eatShot",
+    "reverse",
+    "reverse",
+    "reverse",
+    "reverse",
+    "passThrough",
+    "reverse",
+    "reverse",
+    "reverse",
+    "reverse"
+   ],
+   [
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed"
+   ],
+   [
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed"
+   ],
+   [
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed"
+   ],
+   [
+    "halveSpeed",
+    "passThrough",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "passThrough",
+    "halveSpeed",
+    "halveSpeed",
+    "passThrough",
+    "halveSpeed"
+   ],
+   [
+    "halveSpeed",
+    "passThrough",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "halveSpeed",
+    "objectIntoObject"
+   ]
+  ],
+  "addresses": [
+   [
+    "$9ED7",
+    "$9FDF",
+    "$9F20",
+    "$9F20",
+    "$9F20",
+    "$9F20",
+    "$9F20",
+    "$9ED7",
+    "$9ED7",
+    "$9E6D",
+    "$9EBF"
+   ],
+   [
+    "$9FEF",
+    "$9F02",
+    "$9F54",
+    "$9F54",
+    "$9F54",
+    "$9FEF",
+    "$9F02",
+    "$A001",
+    "$9F7D",
+    "$9F02",
+    "$9EBB"
+   ],
+   [
+    "$9FB5",
+    "$9F06",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008",
+    "$A008"
+   ],
+   [
+    "$9FB5",
+    "$9F06",
+    "$A014",
+    "$A014",
+    "$A014",
+    "$A014",
+    "$9F02",
+    "$A014",
+    "$A014",
+    "$A014",
+    "$A014"
+   ],
+   [
+    "$9FB5",
+    "$9F06",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020",
+    "$A020"
+   ],
+   [
+    "$9FB5",
+    "$9FDF",
+    "$A02C",
+    "$A02C",
+    "$A02C",
+    "$A02C",
+    "$9F02",
+    "$A02C",
+    "$A02C",
+    "$A02C",
+    "$A02C"
+   ],
+   [
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12"
+   ],
+   [
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12"
+   ],
+   [
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12"
+   ],
+   [
+    "$9E12",
+    "$9F02",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9F02",
+    "$9E12",
+    "$9E12",
+    "$9F02",
+    "$9E12"
+   ],
+   [
+    "$9E12",
+    "$9F02",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E12",
+    "$9E8E"
+   ]
+  ],
+  "note": "matice 11 × 11: řádek je rodina toho, kdo narazil (bajt +11 záznamu je rovnou 22 × řádek), sloupec rodina toho, do koho narazil; sloupec 7 se použije i pro okraj silnice a pro cíl mimo okno světa. Krabice je táž ±7 jako v M4 a M5 – v kódu je to jedno srovnání se 15."
+ },
+ "death": {
+  "clsLow": 128,
+  "step": 8,
+  "limit": 220,
+  "passes": [
+   11,
+   12
+  ],
+  "lengths": {
+   "rodina 0, 12 průchodů": 4,
+   "rodina 2, 11 průchodů": 1
+  },
+  "note": "zničený záznam má v rychlosti horní bit a jeho druh se posouvá od $80 po osmi; když dojde na $DC, záznam z tabulky zmizí. To je těch 12 průchodů, které naměřila M5 u předání řízení."
+ },
+ "time": {
+  "counter": "$8F1A",
+  "bar": "$8F19",
+  "reload": 3500,
+  "reloadsSeen": null,
+  "barEnd": 212,
+  "barStart": 214,
+  "ticks": 3,
+  "passesTotal": 10500,
+  "perStep": {
+   "0": 1216,
+   "1": 6400
+  },
+  "barSteps": {},
+  "note": "`TIME` je 16bitové počítadlo na $8F1A, které ubývá o 1 každý průchod hlavní smyčkou; když dojde na nulu, ubere se ukazateli jeden znakový dílek a počítadlo se nabije znovu. Ukazatel je ukazatel do videopaměti: začíná na $D6 a hra skončí, až spadne pod $D4 – to je 3 dílků a 10500 průchodů hlavní smyčky na celou hru (při naměřené délce průchodu 2,41 snímku asi 506 sekund). V naměřených bězích se ani jeden dílek neubral, tak dlouhé nejsou."
+ },
+ "census": {
+  "1": {
+   "$0000": 1,
+   "$0910": 1,
+   "$1070": 4,
+   "$19F0": 6,
+   "$1A68": 6
+  },
+  "2": {
+   "$0228": 1,
+   "$0648": 2,
+   "$0910": 1,
+   "$0A60": 2,
+   "$1070": 4,
+   "$1A68": 6
+  },
+  "3": {
+   "$0228": 4,
+   "$0648": 4,
+   "$0910": 1,
+   "$0A60": 2,
+   "$1070": 4,
+   "$17F8": 2,
+   "$1A68": 6
+  },
+  "4": {
+   "$0228": 3,
+   "$0540": 2,
+   "$0648": 4,
+   "$0910": 1,
+   "$0A60": 2,
+   "$1070": 4,
+   "$17F8": 2,
+   "$18E8": 2,
+   "$1A68": 2
+  },
+  "5": {
+   "$0330": 2,
+   "$0540": 2,
+   "$0648": 2,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$17F8": 2,
+   "$18E8": 2,
+   "$1A68": 3
+  },
+  "6": {
+   "$0228": 4,
+   "$0330": 2,
+   "$0540": 2,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$16E0": 12,
+   "$18E8": 2,
+   "$1A68": 3
+  },
+  "7": {
+   "$0228": 4,
+   "$0330": 4,
+   "$0540": 1,
+   "$0910": 1,
+   "$0A60": 6,
+   "$1070": 4,
+   "$16E0": 12,
+   "$1A68": 2
+  },
+  "8": {
+   "$0228": 4,
+   "$0330": 7,
+   "$0540": 1,
+   "$0648": 2,
+   "$0858": 1,
+   "$0910": 1,
+   "$0A60": 2,
+   "$1070": 4,
+   "$16E0": 12,
+   "$1A68": 1
+  },
+  "9": {
+   "$0228": 1,
+   "$0330": 6,
+   "$0540": 1,
+   "$0648": 6,
+   "$0858": 2,
+   "$0910": 1,
+   "$0A60": 2,
+   "$1070": 4,
+   "$16E0": 6,
+   "$1A68": 5
+  },
+  "10": {
+   "$0330": 5,
+   "$0438": 6,
+   "$0648": 4,
+   "$0858": 2,
+   "$0910": 1,
+   "$1070": 4,
+   "$16E0": 8,
+   "$1A68": 4
+  },
+  "11": {
+   "$0438": 9,
+   "$0648": 4,
+   "$0858": 2,
+   "$0910": 1,
+   "$1070": 4,
+   "$16E0": 8,
+   "$1A68": 5
+  },
+  "12": {
+   "$0438": 11,
+   "$0540": 2,
+   "$0648": 4,
+   "$0858": 4,
+   "$0910": 1,
+   "$1070": 4,
+   "$1A68": 6
+  },
+  "13": {
+   "$0438": 7,
+   "$0540": 5,
+   "$0648": 4,
+   "$0858": 4,
+   "$0910": 1,
+   "$0A60": 3,
+   "$1070": 4,
+   "$1A68": 4
+  },
+  "14": {
+   "$0438": 3,
+   "$0540": 7,
+   "$0648": 2,
+   "$0858": 2,
+   "$0910": 1,
+   "$0A60": 7,
+   "$1070": 4,
+   "$1378": 1,
+   "$1A68": 4
+  },
+  "15": {
+   "$0438": 3,
+   "$0540": 3,
+   "$0648": 4,
+   "$0858": 2,
+   "$0910": 1,
+   "$0A60": 7,
+   "$1070": 4,
+   "$1378": 1,
+   "$16E0": 4,
+   "$1A68": 2
+  },
+  "16": {
+   "$0648": 4,
+   "$0858": 2,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$1378": 7,
+   "$16E0": 4,
+   "$17F8": 6,
+   "$1A68": 1
+  },
+  "17": {
+   "$0648": 2,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 6,
+   "$16E0": 12,
+   "$17F8": 6,
+   "$1A68": 3
+  },
+  "18": {
+   "$0540": 3,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 4,
+   "$16E0": 12,
+   "$17F8": 6,
+   "$1A68": 3
+  },
+  "19": {
+   "$0540": 3,
+   "$0858": 4,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 1,
+   "$16E0": 16,
+   "$1A68": 3
+  },
+  "20": {
+   "$0228": 2,
+   "$0330": 2,
+   "$0438": 2,
+   "$0540": 3,
+   "$0858": 4,
+   "$0910": 1,
+   "$0A60": 6,
+   "$1070": 4,
+   "$16E0": 8
+  },
+  "21": {
+   "$0228": 2,
+   "$0330": 2,
+   "$0438": 2,
+   "$0858": 4,
+   "$0910": 1,
+   "$0A60": 6,
+   "$1070": 4,
+   "$16E0": 8,
+   "$1A68": 3
+  },
+  "22": {
+   "$0330": 1,
+   "$0438": 4,
+   "$0540": 4,
+   "$0910": 1,
+   "$0A60": 6,
+   "$1070": 4,
+   "$16E0": 8,
+   "$1A68": 3
+  },
+  "23": {
+   "$0228": 2,
+   "$0438": 3,
+   "$0540": 6,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$16E0": 8,
+   "$1A68": 3
+  },
+  "24": {
+   "$0228": 2,
+   "$0330": 3,
+   "$0438": 4,
+   "$0540": 6,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$16E0": 9
+  },
+  "25": {
+   "$0228": 2,
+   "$0330": 3,
+   "$0438": 4,
+   "$0540": 3,
+   "$0648": 2,
+   "$0750": 2,
+   "$0910": 1,
+   "$0A60": 4,
+   "$1070": 4,
+   "$16E0": 12
+  },
+  "26": {
+   "$0228": 6,
+   "$0330": 2,
+   "$0438": 2,
+   "$0540": 1,
+   "$0648": 6,
+   "$0750": 2,
+   "$0910": 1,
+   "$1070": 4,
+   "$16E0": 12
+  },
+  "27": {
+   "$0228": 7,
+   "$0330": 1,
+   "$0438": 2,
+   "$0540": 1,
+   "$0648": 4,
+   "$0750": 2,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 5,
+   "$16E0": 6,
+   "$1A68": 2
+  },
+  "28": {
+   "$0228": 8,
+   "$0438": 2,
+   "$0540": 6,
+   "$0648": 4,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 5,
+   "$1A68": 4
+  },
+  "29": {
+   "$0228": 8,
+   "$0438": 2,
+   "$0540": 8,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 2,
+   "$1A68": 8
+  },
+  "30": {
+   "$0228": 2,
+   "$0438": 2,
+   "$0540": 6,
+   "$0648": 5,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 5,
+   "$1528": 1,
+   "$19F0": 5,
+   "$1A68": 3
+  },
+  "31": {
+   "$0228": 2,
+   "$0438": 2,
+   "$0648": 5,
+   "$0910": 1,
+   "$1070": 4,
+   "$1378": 5,
+   "$1528": 2,
+   "$19F0": 9,
+   "$1A68": 3
+  }
+ },
+ "censusNote": "kolik čeho bylo v které zóně **nejvíc vidět zároveň** při běhu režimu 6 DEMONSTRATION, který si projede celou silnici sám. Není to tabulka dat silnice (ta je M2), je to sčítání toho, co se v zóně objevilo.",
+ "constants": {
+  "readFrom": {
+   "boxX": "$9E2E",
+   "boxY": "$9E41",
+   "deathStep": "$9CDF",
+   "deathLimit": "$9CE1",
+   "wanderLeft": "$9DEC",
+   "wanderRight": "$9DFD",
+   "timeReload": "$91C1",
+   "timeBarEnd": "$91AE"
+  },
+  "values": {
+   "boxX": 15,
+   "boxY": 15,
+   "deathStep": 8,
+   "deathLimit": 220,
+   "wanderLeft": 245,
+   "wanderRight": 10,
+   "timeReload": 3500,
+   "timeBarEnd": 212
+  },
+  "note": "konstanty pravidel přečtené z kódu hry na adresách výš (§16): krabice je srovnání s 15, tedy ±7; animace zániku jde po osmi do $DC; vrtění rodiny 3 má hranice $F5 a $0A; `TIME` se nabíjí na 3500 a ukazatel končí na $D4."
+ },
+ "verify": {
+  "enemyPasses": 20796,
+  "differencesOnShiftedGenerator": 20,
+  "shiftedPerFamily": {
+   "rodina 2, směr": 4,
+   "rodina 2, x": 5,
+   "rodina 2, y": 2,
+   "rodina 4, směr": 3,
+   "rodina 4, x": 1,
+   "rodina 4, y": 1,
+   "rodina 5, směr": 4
+  },
+  "perFamily": {
+   "2": 10968,
+   "3": 3203,
+   "4": 1810,
+   "5": 4815
+  },
+  "differences": 1,
+  "differencesPerFamily": {
+   "rodina 2, y": 1
+  },
+  "examples": [
+   {
+    "run": "shoot",
+    "step": 703,
+    "slot": 24,
+    "class": "$0228",
+    "what": "moved",
+    "field": "y",
+    "got": 106,
+    "want": 108,
+    "family": 2
+   }
+  ],
+  "note": "referenční model z těchhle tabulek se přehrál na každém naměřeném průchodu každého nepřítele. Průchody, ve kterých záznam přepsal obsah nové zóny nebo se tabulka zkrátila, se nepočítají – to je M2."
+ },
+ "open": [
+  "kdo přesně tahá z generátoru mimo nepřátele: zvuk výbuchu ($9B3D) a kreslení ($AAE4). Než bude zvuk změřený (M8), nedrží port sekvenci sám a semínko si bere ze záznamu.",
+  "co je která rodina předmětů graficky – skleněná krychle, cihlová zeď, kulisa (M2); změřené je, že rodina 8 po zásahu **roztaje** (druh se posouvá po dvou), což je ta „bedna, co se rozteče\" z Crash 20.",
+  "bodování: v naměřených bězích se při přechodu zóny nezvětšil žádný bajt mimo tabulku objektů, takže se skóre za zónu průběžně nepřičítá; kde se počítá, zůstává otevřené (ZADANI §4) a bez znakové sady (§2) se stejně nedá nakreslit.",
+  "kolik dílků má ukazatel TIME a co se stane, až dojde – v naměřených bězích se nevyčerpal.",
+  "co se mění v druhém průchodu hry (M7)."
+ ]
+}

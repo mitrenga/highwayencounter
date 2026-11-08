@@ -1,0 +1,22 @@
+{
+  "note": "M1: jen to, co je změřené na originálu (sources/docs/screen_layout.md). Pravidla, fyzika, silnice a nepřátelé přijdou v M2–M6 z vlastních datových souborů; nic se tu neodhaduje.",
+  "frameRate": 50.08,
+  "firstZone": 30,
+  "lastZone": 0,
+  "vortons": 5,
+  "screen": {
+    "width": 256, "height": 192,
+    "playRows": 19, "playHeight": 152,
+    "panelRow": 19, "panelRows": 5, "panelY": 152,
+    "panelDrawnHeight": 34,
+    "note": "panel je dole (znakové řádky 19–23, y = 152..191); hra ho kreslí jako hotový obrázek z $6000 a spodních šest pixelových řádek nechává černých"
+  },
+  "zoneLength": 176,
+  "zoneLengthNote": "délka zóny ve světové souřadnici; kamera je zóna, ve které stojí hráč (y // 176), a neroluje – skáče (M0b a M4, disasm_notes.md §6 a §14)",
+  "openQuestions": [
+    "kolik zón silnice doopravdy má (30 × 32, ZADANI §3.4)",
+    "kolik Vortonů originál počítá (pět × čtyři plus řízený, ZADANI §7)",
+    "co měří POWER (dobíjení laseru × energie Vortona, ZADANI §3.7)",
+    "barva borderu za hry (ZADANI §7)"
+  ]
+}

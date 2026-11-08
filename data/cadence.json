@@ -1,0 +1,116 @@
+{
+ "note": "Kadence hlavní smyčky Highway Encounter, odměřená na běžícím originálu (tools/dumpcadence.py). Průchod trvá práce + regulátor + zvuk; regulátor a zvuk jsou přesné, práce je jediná fitovaná část. Přechod zóny je zvláštní případ.",
+ "source": "tools/dumpcadence.py, build/gameplay.z80, build/highwayencounter.z80",
+ "cpuHz": 3500000,
+ "frameTstates": 69888,
+ "governor": {
+  "at": "$9AD8",
+  "list": "$8D52",
+  "listTail": "$8F0B",
+  "recordBytes": 3,
+  "limit": "$6A",
+  "maxDrawn": 8,
+  "setupT": 49,
+  "iterT": 2618,
+  "tailT": 5,
+  "skipT": 30,
+  "iterations": "2 × ($6A − ($52 + 3 × kreslených))",
+  "tstates": {
+   "0": 125718,
+   "1": 110010,
+   "2": 94302,
+   "3": 78594,
+   "4": 62886,
+   "5": 47178,
+   "6": 31470,
+   "7": 15762,
+   "8": 30,
+   "9": 30,
+   "10": 30,
+   "11": 30,
+   "12": 30,
+   "13": 30,
+   "14": 30,
+   "15": 30
+  },
+  "histogram": {
+   "1": 1181,
+   "2": 730,
+   "3": 613,
+   "4": 335,
+   "5": 195,
+   "6": 1531,
+   "7": 773,
+   "8": 647,
+   "9": 243,
+   "10": 113,
+   "11": 29,
+   "12": 67,
+   "13": 16
+  },
+  "note": "Prázdná čekací smyčka na konci průchodu. Čte konec seznamu kreslení ($8F0B) a čeká 2618 T za každou svou otáčku; otáček je 48 − 6 × počet kreslených záznamů, takže od osmi záznamů výš se nečeká vůbec. Tím se chudé průchody zpomalí na úroveň bohatých – a proto délka průchodu kolísá míň, než by kolísala práce sama."
+ },
+ "work": {
+  "base": 1982.3,
+  "perDrawn": 16365.7,
+  "perLive": 2181.5,
+  "note": "T-stavy práce průchodu: kreslení jednoho záznamu (pozadí, sprit, počítadla buněk, přenos na obrazovku) a krok jednoho živého záznamu tabulky, ať je vidět, nebo ne. Jediná fitovaná část modelu; „base\" vyšla skoro nulová, což je samo o sobě kontrola, že se nic nezapomnělo."
+ },
+ "sound": {
+  "from": "data/sounds.json",
+  "flag": "$8F15",
+  "dispatch": "$9AEF",
+  "priority": [
+   1,
+   6,
+   3,
+   7,
+   4
+  ],
+  "tstates": {
+   "fire": 70918,
+   "blast": 18740,
+   "bump": 86224,
+   "destroy": 75141,
+   "crash": 49480
+  },
+  "bits": {
+   "fire": 1,
+   "blast": 3,
+   "bump": 4,
+   "destroy": 6,
+   "crash": 7
+  },
+  "note": "Efekt se hraje synchronně uvnitř smyčky, takže se jeho délka přičte celá. Průchod, ve kterém si o zvuk hra řekla, je ještě krátký – hraje se až v tom dalším."
+ },
+ "repaint": {
+  "passes": 32,
+  "zonePasses": 32,
+  "vortonLostPasses": 0,
+  "detect": "okno zóny se změnilo, nebo průchod skončil s prázdnou tabulkou počítadel $FD00",
+  "mean": 953982,
+  "median": 914508,
+  "min": 851952,
+  "max": 1158875,
+  "extraMedian": 712283,
+  "extraSd": 75991,
+  "note": "Průchod, ve kterém originál smaže a znovu složí celou hrací plochu z bloku pozadí: přechod do další zóny a ztráta řízeného Vortona. Svou obvyklou práci ten průchod udělá taky, takže se model práce nezahazuje – přičte se k němu `extraMedian`."
+ },
+ "verification": {
+  "passes": 6473,
+  "steadyPasses": 6441,
+  "meanT": 187845,
+  "medianT": 174569,
+  "meanFrames": 2.688,
+  "residualSd": 7479,
+  "residualP05": -11410,
+  "residualP95": 11964,
+  "relMedianPct": 2.24,
+  "relP95Pct": 8.08,
+  "withinEighthFrame": 80.2,
+  "withinQuarterFrame": 96.2,
+  "withinHalfFrame": 100.0,
+  "withinFrame": 100.0
+ },
+ "open": "Zbytkový rozptyl práce (kolem 5 %) je v tom, kolik buněk se ten průchod opravdu přenáší na obrazovku – to závisí na tom, kde sprity stojí, a port si počítadla buněk nevede. Kdyby si je screenRender.js vedl, dal by se model dotáhnout na jednotky procent promile."
+}

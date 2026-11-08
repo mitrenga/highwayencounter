@@ -1,0 +1,4771 @@
+{
+  "note": "tabulka dat silnice originálu (tools/dumphighway.py): 240 záznamů po 16 bajtech na $7B00-$89FF, týž formát jako živá tabulka objektů na $8A00 (disasm_notes.md §12, §17). Je to obsah paměti, nic se nedokresluje ani nedopočítává.",
+  "source": "build/gameplay.z80 (rozehraná hra)",
+  "table": {
+    "at": "$7B00",
+    "to": "$89FF",
+    "count": 240,
+    "recordBytes": 16,
+    "endsWhereLiveTableBegins": "$8A00",
+    "terminator": "žádný – všech 240 míst je obsazených (x je 0-72, nikde $FE ani $FF, kterými se značí prázdno a konec v živé tabulce)"
+  },
+  "record": {
+    "+0": "x napříč silnicí (0-72)",
+    "+1,+2": "y podél silnice, 16 bitů",
+    "+3,+4": "posun v kreslicím bufferu",
+    "+5,+6": "druh objektu; horní bajt bez bitu 4 je rodina (§16)",
+    "+7": "směr 0-7",
+    "+8": "rychlost 0-2",
+    "+9": "posun spritu v buňce",
+    "+10": "druh pro volbu spritu",
+    "+11": "22 × rodina – řádek matice srážek na $9000",
+    "+12": "u rodiny 4 dráha, u rodiny 5 směr vzniku, jinak 0",
+    "+13,+14,+15": "v tabulce dat silnice kopie x a y téhož záznamu (změřeno tady, na všech 240); v živé tabulce $8A00 je +13 táž kopie x, ale +14/+15 nese adresu vzoru v téhle tabulce ($7B00 + 16 × index) – tím je zavřená „pevná dvojice (x, y)\", kterou §12 nechala otevřenou"
+  },
+  "records": [
+    {
+      "index": 0,
+      "at": "$7B00",
+      "x": 36,
+      "y": 628,
+      "depth": 54157,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 17,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 628
+      }
+    },
+    {
+      "index": 1,
+      "at": "$7B10",
+      "x": 56,
+      "y": 592,
+      "depth": 54406,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 18,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 592
+      }
+    },
+    {
+      "index": 2,
+      "at": "$7B20",
+      "x": 64,
+      "y": 592,
+      "depth": 54277,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 592
+      }
+    },
+    {
+      "index": 3,
+      "at": "$7B30",
+      "x": 72,
+      "y": 592,
+      "depth": 54148,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 592
+      }
+    },
+    {
+      "index": 4,
+      "at": "$7B40",
+      "x": 0,
+      "y": 632,
+      "depth": 54674,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 632
+      }
+    },
+    {
+      "index": 5,
+      "at": "$7B50",
+      "x": 32,
+      "y": 454,
+      "depth": 56983,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 32,
+        "y": 454
+      }
+    },
+    {
+      "index": 6,
+      "at": "$7B60",
+      "x": 18,
+      "y": 462,
+      "depth": 57082,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 18,
+        "y": 462
+      }
+    },
+    {
+      "index": 7,
+      "at": "$7B70",
+      "x": 6,
+      "y": 468,
+      "depth": 57180,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 6,
+        "y": 468
+      }
+    },
+    {
+      "index": 8,
+      "at": "$7B80",
+      "x": 40,
+      "y": 472,
+      "depth": 56569,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 472
+      }
+    },
+    {
+      "index": 9,
+      "at": "$7B90",
+      "x": 54,
+      "y": 466,
+      "depth": 56438,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 54,
+        "y": 466
+      }
+    },
+    {
+      "index": 10,
+      "at": "$7BA0",
+      "x": 66,
+      "y": 470,
+      "depth": 56181,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 66,
+        "y": 470
+      }
+    },
+    {
+      "index": 11,
+      "at": "$7BB0",
+      "x": 40,
+      "y": 948,
+      "depth": 49012,
+      "cls": "$18E8",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 948
+      }
+    },
+    {
+      "index": 12,
+      "at": "$7BC0",
+      "x": 32,
+      "y": 988,
+      "depth": 48506,
+      "cls": "$18E8",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 32,
+        "y": 988
+      }
+    },
+    {
+      "index": 13,
+      "at": "$7BD0",
+      "x": 45,
+      "y": 1006,
+      "depth": 48027,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 45,
+        "y": 1006
+      }
+    },
+    {
+      "index": 14,
+      "at": "$7BE0",
+      "x": 52,
+      "y": 1018,
+      "depth": 47707,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 52,
+        "y": 1018
+      }
+    },
+    {
+      "index": 15,
+      "at": "$7BF0",
+      "x": 20,
+      "y": 1458,
+      "depth": 41238,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 6,
+      "speed": 1,
+      "phase": 12,
+      "kind": 17,
+      "row": 66,
+      "extra": 6,
+      "spawn": {
+        "x": 20,
+        "y": 1458
+      }
+    },
+    {
+      "index": 16,
+      "at": "$7C00",
+      "x": 66,
+      "y": 948,
+      "depth": 48593,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 4,
+      "kind": 15,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 66,
+        "y": 948
+      }
+    },
+    {
+      "index": 17,
+      "at": "$7C10",
+      "x": 8,
+      "y": 988,
+      "depth": 48893,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 15,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 8,
+        "y": 988
+      }
+    },
+    {
+      "index": 18,
+      "at": "$7C20",
+      "x": 44,
+      "y": 760,
+      "depth": 51932,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 44,
+        "y": 760
+      }
+    },
+    {
+      "index": 19,
+      "at": "$7C30",
+      "x": 16,
+      "y": 816,
+      "depth": 51495,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 816
+      }
+    },
+    {
+      "index": 20,
+      "at": "$7C40",
+      "x": 56,
+      "y": 816,
+      "depth": 50850,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 18,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 816
+      }
+    },
+    {
+      "index": 21,
+      "at": "$7C50",
+      "x": 28,
+      "y": 776,
+      "depth": 51936,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 28,
+        "y": 776
+      }
+    },
+    {
+      "index": 22,
+      "at": "$7C60",
+      "x": 56,
+      "y": 1458,
+      "depth": 40658,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 6,
+      "speed": 1,
+      "phase": 4,
+      "kind": 17,
+      "row": 66,
+      "extra": 6,
+      "spawn": {
+        "x": 56,
+        "y": 1458
+      }
+    },
+    {
+      "index": 23,
+      "at": "$7C70",
+      "x": 36,
+      "y": 740,
+      "depth": 52379,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 17,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 740
+      }
+    },
+    {
+      "index": 24,
+      "at": "$7C80",
+      "x": 24,
+      "y": 750,
+      "depth": 52413,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 1,
+      "phase": 12,
+      "kind": 17,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 24,
+        "y": 750
+      }
+    },
+    {
+      "index": 25,
+      "at": "$7C90",
+      "x": 48,
+      "y": 750,
+      "depth": 52026,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 1,
+      "phase": 12,
+      "kind": 17,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 48,
+        "y": 750
+      }
+    },
+    {
+      "index": 26,
+      "at": "$7CA0",
+      "x": 36,
+      "y": 1168,
+      "depth": 45584,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 8,
+      "kind": 17,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 1168
+      }
+    },
+    {
+      "index": 27,
+      "at": "$7CB0",
+      "x": 20,
+      "y": 1152,
+      "depth": 46096,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 2,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 66,
+      "extra": 2,
+      "spawn": {
+        "x": 20,
+        "y": 1152
+      }
+    },
+    {
+      "index": 28,
+      "at": "$7CC0",
+      "x": 60,
+      "y": 1124,
+      "depth": 45896,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 60,
+        "y": 1124
+      }
+    },
+    {
+      "index": 29,
+      "at": "$7CD0",
+      "x": 0,
+      "y": 1088,
+      "depth": 47435,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 1088
+      }
+    },
+    {
+      "index": 30,
+      "at": "$7CE0",
+      "x": 8,
+      "y": 1088,
+      "depth": 47306,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 1088
+      }
+    },
+    {
+      "index": 31,
+      "at": "$7CF0",
+      "x": 64,
+      "y": 1192,
+      "depth": 44752,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 1192
+      }
+    },
+    {
+      "index": 32,
+      "at": "$7D00",
+      "x": 72,
+      "y": 1192,
+      "depth": 44623,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1192
+      }
+    },
+    {
+      "index": 33,
+      "at": "$7D10",
+      "x": 8,
+      "y": 1256,
+      "depth": 44639,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 1256
+      }
+    },
+    {
+      "index": 34,
+      "at": "$7D20",
+      "x": 16,
+      "y": 1272,
+      "depth": 44256,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1272
+      }
+    },
+    {
+      "index": 35,
+      "at": "$7D30",
+      "x": 8,
+      "y": 1288,
+      "depth": 44131,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 1288
+      }
+    },
+    {
+      "index": 36,
+      "at": "$7D40",
+      "x": 0,
+      "y": 1312,
+      "depth": 43879,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 1312
+      }
+    },
+    {
+      "index": 37,
+      "at": "$7D50",
+      "x": 0,
+      "y": 1344,
+      "depth": 43371,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 1344
+      }
+    },
+    {
+      "index": 38,
+      "at": "$7D60",
+      "x": 16,
+      "y": 1368,
+      "depth": 42732,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1368
+      }
+    },
+    {
+      "index": 39,
+      "at": "$7D70",
+      "x": 72,
+      "y": 1264,
+      "depth": 43480,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1264
+      }
+    },
+    {
+      "index": 40,
+      "at": "$7D80",
+      "x": 56,
+      "y": 1280,
+      "depth": 43484,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 1280
+      }
+    },
+    {
+      "index": 41,
+      "at": "$7D90",
+      "x": 72,
+      "y": 1304,
+      "depth": 42845,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1304
+      }
+    },
+    {
+      "index": 42,
+      "at": "$7DA0",
+      "x": 64,
+      "y": 1328,
+      "depth": 42593,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 1328
+      }
+    },
+    {
+      "index": 43,
+      "at": "$7DB0",
+      "x": 36,
+      "y": 1644,
+      "depth": 38028,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 1644
+      }
+    },
+    {
+      "index": 44,
+      "at": "$7DC0",
+      "x": 21,
+      "y": 1633,
+      "depth": 38444,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 21,
+        "y": 1633
+      }
+    },
+    {
+      "index": 45,
+      "at": "$7DD0",
+      "x": 52,
+      "y": 1654,
+      "depth": 37611,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 4,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 52,
+        "y": 1654
+      }
+    },
+    {
+      "index": 46,
+      "at": "$7DE0",
+      "x": 6,
+      "y": 1674,
+      "depth": 38035,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 6,
+        "y": 1674
+      }
+    },
+    {
+      "index": 47,
+      "at": "$7DF0",
+      "x": 66,
+      "y": 1668,
+      "depth": 37163,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 4,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 66,
+        "y": 1668
+      }
+    },
+    {
+      "index": 48,
+      "at": "$7E00",
+      "x": 8,
+      "y": 2040,
+      "depth": 32193,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 0,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 88,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 2040
+      }
+    },
+    {
+      "index": 49,
+      "at": "$7E10",
+      "x": 56,
+      "y": 2064,
+      "depth": 31038,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 2,
+      "speed": 1,
+      "phase": 0,
+      "kind": 18,
+      "row": 88,
+      "extra": 2,
+      "spawn": {
+        "x": 56,
+        "y": 2064
+      }
+    },
+    {
+      "index": 50,
+      "at": "$7E20",
+      "x": 48,
+      "y": 2048,
+      "depth": 31421,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 15,
+      "row": 88,
+      "extra": 4,
+      "spawn": {
+        "x": 48,
+        "y": 2048
+      }
+    },
+    {
+      "index": 51,
+      "at": "$7E30",
+      "x": 32,
+      "y": 2056,
+      "depth": 31552,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 1,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 88,
+      "extra": 1,
+      "spawn": {
+        "x": 32,
+        "y": 2056
+      }
+    },
+    {
+      "index": 52,
+      "at": "$7E40",
+      "x": 28,
+      "y": 2276,
+      "depth": 28124,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 15,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 28,
+        "y": 2276
+      }
+    },
+    {
+      "index": 53,
+      "at": "$7E50",
+      "x": 72,
+      "y": 1352,
+      "depth": 42083,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1352
+      }
+    },
+    {
+      "index": 54,
+      "at": "$7E60",
+      "x": 56,
+      "y": 1376,
+      "depth": 41960,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 1376
+      }
+    },
+    {
+      "index": 55,
+      "at": "$7E70",
+      "x": 24,
+      "y": 1336,
+      "depth": 43111,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 2,
+      "speed": 1,
+      "phase": 0,
+      "kind": 17,
+      "row": 44,
+      "extra": 2,
+      "spawn": {
+        "x": 24,
+        "y": 1336
+      }
+    },
+    {
+      "index": 56,
+      "at": "$7E80",
+      "x": 40,
+      "y": 1312,
+      "depth": 43234,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 6,
+      "speed": 1,
+      "phase": 0,
+      "kind": 17,
+      "row": 44,
+      "extra": 6,
+      "spawn": {
+        "x": 40,
+        "y": 1312
+      }
+    },
+    {
+      "index": 57,
+      "at": "$7E90",
+      "x": 28,
+      "y": 1516,
+      "depth": 40189,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 28,
+        "y": 1516
+      }
+    },
+    {
+      "index": 58,
+      "at": "$7EA0",
+      "x": 44,
+      "y": 1516,
+      "depth": 39931,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 44,
+        "y": 1516
+      }
+    },
+    {
+      "index": 59,
+      "at": "$7EB0",
+      "x": 36,
+      "y": 1524,
+      "depth": 39933,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 1524
+      }
+    },
+    {
+      "index": 60,
+      "at": "$7EC0",
+      "x": 36,
+      "y": 1516,
+      "depth": 40060,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 36,
+        "y": 1516
+      }
+    },
+    {
+      "index": 61,
+      "at": "$7ED0",
+      "x": 52,
+      "y": 2088,
+      "depth": 30721,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 1,
+      "speed": 2,
+      "phase": 8,
+      "kind": 15,
+      "row": 88,
+      "extra": 1,
+      "spawn": {
+        "x": 52,
+        "y": 2088
+      }
+    },
+    {
+      "index": 62,
+      "at": "$7EE0",
+      "x": 28,
+      "y": 2068,
+      "depth": 31426,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 7,
+      "speed": 2,
+      "phase": 0,
+      "kind": 16,
+      "row": 88,
+      "extra": 7,
+      "spawn": {
+        "x": 28,
+        "y": 2068
+      }
+    },
+    {
+      "index": 63,
+      "at": "$7EF0",
+      "x": 16,
+      "y": 1904,
+      "depth": 34223,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1904
+      }
+    },
+    {
+      "index": 64,
+      "at": "$7F00",
+      "x": 56,
+      "y": 1904,
+      "depth": 33578,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 18,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 1904
+      }
+    },
+    {
+      "index": 65,
+      "at": "$7F10",
+      "x": 16,
+      "y": 1912,
+      "depth": 34096,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1912
+      }
+    },
+    {
+      "index": 66,
+      "at": "$7F20",
+      "x": 16,
+      "y": 1920,
+      "depth": 33969,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1920
+      }
+    },
+    {
+      "index": 67,
+      "at": "$7F30",
+      "x": 72,
+      "y": 1904,
+      "depth": 33320,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1904
+      }
+    },
+    {
+      "index": 68,
+      "at": "$7F40",
+      "x": 64,
+      "y": 1904,
+      "depth": 33449,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 1904
+      }
+    },
+    {
+      "index": 69,
+      "at": "$7F50",
+      "x": 56,
+      "y": 1912,
+      "depth": 33451,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 1912
+      }
+    },
+    {
+      "index": 70,
+      "at": "$7F60",
+      "x": 56,
+      "y": 1920,
+      "depth": 33324,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 1920
+      }
+    },
+    {
+      "index": 71,
+      "at": "$7F70",
+      "x": 0,
+      "y": 1904,
+      "depth": 34481,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 1904
+      }
+    },
+    {
+      "index": 72,
+      "at": "$7F80",
+      "x": 8,
+      "y": 1904,
+      "depth": 34352,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 1904
+      }
+    },
+    {
+      "index": 73,
+      "at": "$7F90",
+      "x": 38,
+      "y": 1832,
+      "depth": 35011,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 38,
+        "y": 1832
+      }
+    },
+    {
+      "index": 74,
+      "at": "$7FA0",
+      "x": 30,
+      "y": 1848,
+      "depth": 34886,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 30,
+        "y": 1848
+      }
+    },
+    {
+      "index": 75,
+      "at": "$7FB0",
+      "x": 20,
+      "y": 1850,
+      "depth": 35015,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 20,
+        "y": 1850
+      }
+    },
+    {
+      "index": 76,
+      "at": "$7FC0",
+      "x": 52,
+      "y": 1860,
+      "depth": 34341,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 52,
+        "y": 1860
+      }
+    },
+    {
+      "index": 77,
+      "at": "$7FD0",
+      "x": 16,
+      "y": 2168,
+      "depth": 30032,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 3,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 88,
+      "extra": 3,
+      "spawn": {
+        "x": 16,
+        "y": 2168
+      }
+    },
+    {
+      "index": 78,
+      "at": "$7FE0",
+      "x": 48,
+      "y": 2160,
+      "depth": 29643,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 17,
+      "row": 88,
+      "extra": 4,
+      "spawn": {
+        "x": 48,
+        "y": 2160
+      }
+    },
+    {
+      "index": 79,
+      "at": "$7FF0",
+      "x": 40,
+      "y": 2182,
+      "depth": 29422,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 3,
+      "speed": 2,
+      "phase": 12,
+      "kind": 16,
+      "row": 88,
+      "extra": 3,
+      "spawn": {
+        "x": 40,
+        "y": 2182
+      }
+    },
+    {
+      "index": 80,
+      "at": "$8000",
+      "x": 44,
+      "y": 2276,
+      "depth": 27866,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 44,
+        "y": 2276
+      }
+    },
+    {
+      "index": 81,
+      "at": "$8010",
+      "x": 36,
+      "y": 2272,
+      "depth": 28058,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 2272
+      }
+    },
+    {
+      "index": 82,
+      "at": "$8020",
+      "x": 36,
+      "y": 2280,
+      "depth": 27931,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 2280
+      }
+    },
+    {
+      "index": 83,
+      "at": "$8030",
+      "x": 18,
+      "y": 2358,
+      "depth": 26983,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 18,
+        "y": 2358
+      }
+    },
+    {
+      "index": 84,
+      "at": "$8040",
+      "x": 50,
+      "y": 2406,
+      "depth": 25705,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 50,
+        "y": 2406
+      }
+    },
+    {
+      "index": 85,
+      "at": "$8050",
+      "x": 48,
+      "y": 2388,
+      "depth": 26023,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 48,
+        "y": 2388
+      }
+    },
+    {
+      "index": 86,
+      "at": "$8060",
+      "x": 22,
+      "y": 2388,
+      "depth": 26442,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 12,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 22,
+        "y": 2388
+      }
+    },
+    {
+      "index": 87,
+      "at": "$8070",
+      "x": 48,
+      "y": 2528,
+      "depth": 23801,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 2528
+      }
+    },
+    {
+      "index": 88,
+      "at": "$8080",
+      "x": 16,
+      "y": 2592,
+      "depth": 23301,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 2592
+      }
+    },
+    {
+      "index": 89,
+      "at": "$8090",
+      "x": 8,
+      "y": 2600,
+      "depth": 23303,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 2600
+      }
+    },
+    {
+      "index": 90,
+      "at": "$80A0",
+      "x": 40,
+      "y": 2544,
+      "depth": 23676,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 40,
+        "y": 2544
+      }
+    },
+    {
+      "index": 91,
+      "at": "$80B0",
+      "x": 34,
+      "y": 2558,
+      "depth": 23550,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 34,
+        "y": 2558
+      }
+    },
+    {
+      "index": 92,
+      "at": "$80C0",
+      "x": 28,
+      "y": 2572,
+      "depth": 23425,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 28,
+        "y": 2572
+      }
+    },
+    {
+      "index": 93,
+      "at": "$80D0",
+      "x": 36,
+      "y": 2740,
+      "depth": 20629,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 2740
+      }
+    },
+    {
+      "index": 94,
+      "at": "$80E0",
+      "x": 28,
+      "y": 2748,
+      "depth": 20631,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 28,
+        "y": 2748
+      }
+    },
+    {
+      "index": 95,
+      "at": "$80F0",
+      "x": 44,
+      "y": 2748,
+      "depth": 20373,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 44,
+        "y": 2748
+      }
+    },
+    {
+      "index": 96,
+      "at": "$8100",
+      "x": 36,
+      "y": 2756,
+      "depth": 20375,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 2756
+      }
+    },
+    {
+      "index": 97,
+      "at": "$8110",
+      "x": 36,
+      "y": 2748,
+      "depth": 20502,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 6,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 66,
+      "extra": 6,
+      "spawn": {
+        "x": 36,
+        "y": 2748
+      }
+    },
+    {
+      "index": 98,
+      "at": "$8120",
+      "x": 16,
+      "y": 2864,
+      "depth": 18983,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 17,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 2864
+      }
+    },
+    {
+      "index": 99,
+      "at": "$8130",
+      "x": 56,
+      "y": 2864,
+      "depth": 18338,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 2864
+      }
+    },
+    {
+      "index": 100,
+      "at": "$8140",
+      "x": 0,
+      "y": 2848,
+      "depth": 19495,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 2848
+      }
+    },
+    {
+      "index": 101,
+      "at": "$8150",
+      "x": 72,
+      "y": 2848,
+      "depth": 18334,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 2848
+      }
+    },
+    {
+      "index": 102,
+      "at": "$8160",
+      "x": 64,
+      "y": 2856,
+      "depth": 18336,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 2856
+      }
+    },
+    {
+      "index": 103,
+      "at": "$8170",
+      "x": 8,
+      "y": 2856,
+      "depth": 19239,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 2856
+      }
+    },
+    {
+      "index": 104,
+      "at": "$8180",
+      "x": 24,
+      "y": 3062,
+      "depth": 15710,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 2,
+      "speed": 1,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 2,
+      "spawn": {
+        "x": 24,
+        "y": 3062
+      }
+    },
+    {
+      "index": 105,
+      "at": "$8190",
+      "x": 40,
+      "y": 3062,
+      "depth": 15452,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 40,
+        "y": 3062
+      }
+    },
+    {
+      "index": 106,
+      "at": "$81A0",
+      "x": 56,
+      "y": 3062,
+      "depth": 15194,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 6,
+      "speed": 1,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 6,
+      "spawn": {
+        "x": 56,
+        "y": 3062
+      }
+    },
+    {
+      "index": 107,
+      "at": "$81B0",
+      "x": 16,
+      "y": 3088,
+      "depth": 15427,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 2,
+      "speed": 2,
+      "phase": 0,
+      "kind": 19,
+      "row": 66,
+      "extra": 2,
+      "spawn": {
+        "x": 16,
+        "y": 3088
+      }
+    },
+    {
+      "index": 108,
+      "at": "$81C0",
+      "x": 32,
+      "y": 3088,
+      "depth": 15169,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 0,
+      "speed": 2,
+      "phase": 0,
+      "kind": 19,
+      "row": 66,
+      "extra": 0,
+      "spawn": {
+        "x": 32,
+        "y": 3088
+      }
+    },
+    {
+      "index": 109,
+      "at": "$81D0",
+      "x": 48,
+      "y": 3088,
+      "depth": 14911,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 6,
+      "speed": 2,
+      "phase": 0,
+      "kind": 19,
+      "row": 66,
+      "extra": 6,
+      "spawn": {
+        "x": 48,
+        "y": 3088
+      }
+    },
+    {
+      "index": 110,
+      "at": "$81E0",
+      "x": 16,
+      "y": 3032,
+      "depth": 16316,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 3032
+      }
+    },
+    {
+      "index": 111,
+      "at": "$81F0",
+      "x": 48,
+      "y": 3024,
+      "depth": 15927,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 3024
+      }
+    },
+    {
+      "index": 112,
+      "at": "$8200",
+      "x": 24,
+      "y": 3112,
+      "depth": 14917,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 3112
+      }
+    },
+    {
+      "index": 113,
+      "at": "$8210",
+      "x": 48,
+      "y": 3112,
+      "depth": 14530,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 3112
+      }
+    },
+    {
+      "index": 114,
+      "at": "$8220",
+      "x": 4,
+      "y": 3068,
+      "depth": 15938,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 4,
+        "y": 3068
+      }
+    },
+    {
+      "index": 115,
+      "at": "$8230",
+      "x": 68,
+      "y": 3084,
+      "depth": 14652,
+      "cls": "$17F8",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 68,
+        "y": 3084
+      }
+    },
+    {
+      "index": 116,
+      "at": "$8240",
+      "x": 40,
+      "y": 3806,
+      "depth": 3641,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 3806
+      }
+    },
+    {
+      "index": 117,
+      "at": "$8250",
+      "x": 30,
+      "y": 3818,
+      "depth": 3612,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 30,
+        "y": 3818
+      }
+    },
+    {
+      "index": 118,
+      "at": "$8260",
+      "x": 6,
+      "y": 3816,
+      "depth": 4031,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 6,
+        "y": 3816
+      }
+    },
+    {
+      "index": 119,
+      "at": "$8270",
+      "x": 52,
+      "y": 3812,
+      "depth": 3353,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 52,
+        "y": 3812
+      }
+    },
+    {
+      "index": 120,
+      "at": "$8280",
+      "x": 68,
+      "y": 3824,
+      "depth": 2904,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 68,
+        "y": 3824
+      }
+    },
+    {
+      "index": 121,
+      "at": "$8290",
+      "x": 16,
+      "y": 3816,
+      "depth": 3870,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 3816
+      }
+    },
+    {
+      "index": 122,
+      "at": "$82A0",
+      "x": 32,
+      "y": 4410,
+      "depth": 59718,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 4,
+      "kind": 16,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 32,
+        "y": 4410
+      }
+    },
+    {
+      "index": 123,
+      "at": "$82B0",
+      "x": 50,
+      "y": 3950,
+      "depth": 1194,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 50,
+        "y": 3950
+      }
+    },
+    {
+      "index": 124,
+      "at": "$82C0",
+      "x": 58,
+      "y": 3970,
+      "depth": 748,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 58,
+        "y": 3970
+      }
+    },
+    {
+      "index": 125,
+      "at": "$82D0",
+      "x": 58,
+      "y": 3984,
+      "depth": 525,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 58,
+        "y": 3984
+      }
+    },
+    {
+      "index": 126,
+      "at": "$82E0",
+      "x": 56,
+      "y": 4108,
+      "depth": 64125,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 56,
+        "y": 4108
+      }
+    },
+    {
+      "index": 127,
+      "at": "$82F0",
+      "x": 56,
+      "y": 4124,
+      "depth": 63871,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 56,
+        "y": 4124
+      }
+    },
+    {
+      "index": 128,
+      "at": "$8300",
+      "x": 16,
+      "y": 4140,
+      "depth": 64262,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 16,
+        "y": 4140
+      }
+    },
+    {
+      "index": 129,
+      "at": "$8310",
+      "x": 16,
+      "y": 4156,
+      "depth": 64008,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 16,
+        "y": 4156
+      }
+    },
+    {
+      "index": 130,
+      "at": "$8320",
+      "x": 4,
+      "y": 3208,
+      "depth": 13715,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 4,
+        "y": 3208
+      }
+    },
+    {
+      "index": 131,
+      "at": "$8330",
+      "x": 14,
+      "y": 3278,
+      "depth": 12443,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 14,
+        "y": 3278
+      }
+    },
+    {
+      "index": 132,
+      "at": "$8340",
+      "x": 18,
+      "y": 3290,
+      "depth": 12188,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 18,
+        "y": 3290
+      }
+    },
+    {
+      "index": 133,
+      "at": "$8350",
+      "x": 36,
+      "y": 3440,
+      "depth": 9516,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 36,
+        "y": 3440
+      }
+    },
+    {
+      "index": 134,
+      "at": "$8360",
+      "x": 44,
+      "y": 3432,
+      "depth": 9514,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 5,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 5,
+      "spawn": {
+        "x": 44,
+        "y": 3432
+      }
+    },
+    {
+      "index": 135,
+      "at": "$8370",
+      "x": 28,
+      "y": 3432,
+      "depth": 9772,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 3,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 3,
+      "spawn": {
+        "x": 28,
+        "y": 3432
+      }
+    },
+    {
+      "index": 136,
+      "at": "$8380",
+      "x": 0,
+      "y": 3706,
+      "depth": 5874,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 1,
+      "speed": 1,
+      "phase": 4,
+      "kind": 16,
+      "row": 88,
+      "extra": 1,
+      "spawn": {
+        "x": 0,
+        "y": 3706
+      }
+    },
+    {
+      "index": 137,
+      "at": "$8390",
+      "x": 72,
+      "y": 3706,
+      "depth": 4713,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 7,
+      "speed": 1,
+      "phase": 4,
+      "kind": 18,
+      "row": 88,
+      "extra": 7,
+      "spawn": {
+        "x": 72,
+        "y": 3706
+      }
+    },
+    {
+      "index": 138,
+      "at": "$83A0",
+      "x": 26,
+      "y": 3736,
+      "depth": 4978,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 26,
+        "y": 3736
+      }
+    },
+    {
+      "index": 139,
+      "at": "$83B0",
+      "x": 46,
+      "y": 3736,
+      "depth": 4656,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 4,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 46,
+        "y": 3736
+      }
+    },
+    {
+      "index": 140,
+      "at": "$83C0",
+      "x": 18,
+      "y": 3746,
+      "depth": 4949,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 18,
+        "y": 3746
+      }
+    },
+    {
+      "index": 141,
+      "at": "$83D0",
+      "x": 58,
+      "y": 3746,
+      "depth": 4304,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 58,
+        "y": 3746
+      }
+    },
+    {
+      "index": 142,
+      "at": "$83E0",
+      "x": 40,
+      "y": 4316,
+      "depth": 61081,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 4316
+      }
+    },
+    {
+      "index": 143,
+      "at": "$83F0",
+      "x": 32,
+      "y": 4324,
+      "depth": 61083,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 5,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 5,
+      "spawn": {
+        "x": 32,
+        "y": 4324
+      }
+    },
+    {
+      "index": 144,
+      "at": "$8400",
+      "x": 24,
+      "y": 4332,
+      "depth": 61085,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 4332
+      }
+    },
+    {
+      "index": 145,
+      "at": "$8410",
+      "x": 32,
+      "y": 4340,
+      "depth": 60829,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 32,
+        "y": 4340
+      }
+    },
+    {
+      "index": 146,
+      "at": "$8420",
+      "x": 40,
+      "y": 4332,
+      "depth": 60827,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 1,
+      "speed": 1,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 1,
+      "spawn": {
+        "x": 40,
+        "y": 4332
+      }
+    },
+    {
+      "index": 147,
+      "at": "$8430",
+      "x": 48,
+      "y": 4324,
+      "depth": 60825,
+      "cls": "$0A60",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4324
+      }
+    },
+    {
+      "index": 148,
+      "at": "$8440",
+      "x": 40,
+      "y": 4324,
+      "depth": 60954,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 0,
+      "speed": 2,
+      "phase": 8,
+      "kind": 17,
+      "row": 44,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 4324
+      }
+    },
+    {
+      "index": 149,
+      "at": "$8450",
+      "x": 32,
+      "y": 4332,
+      "depth": 60956,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 0,
+      "speed": 2,
+      "phase": 8,
+      "kind": 17,
+      "row": 44,
+      "extra": 0,
+      "spawn": {
+        "x": 32,
+        "y": 4332
+      }
+    },
+    {
+      "index": 150,
+      "at": "$8460",
+      "x": 36,
+      "y": 4938,
+      "depth": 51271,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 4938
+      }
+    },
+    {
+      "index": 151,
+      "at": "$8470",
+      "x": 16,
+      "y": 4976,
+      "depth": 50991,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 16,
+        "y": 4976
+      }
+    },
+    {
+      "index": 152,
+      "at": "$8480",
+      "x": 8,
+      "y": 4998,
+      "depth": 50770,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 8,
+        "y": 4998
+      }
+    },
+    {
+      "index": 153,
+      "at": "$8490",
+      "x": 56,
+      "y": 4976,
+      "depth": 50346,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 56,
+        "y": 4976
+      }
+    },
+    {
+      "index": 154,
+      "at": "$84A0",
+      "x": 64,
+      "y": 4998,
+      "depth": 49867,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 64,
+        "y": 4998
+      }
+    },
+    {
+      "index": 155,
+      "at": "$84B0",
+      "x": 8,
+      "y": 4864,
+      "depth": 52898,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 15,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 4864
+      }
+    },
+    {
+      "index": 156,
+      "at": "$84C0",
+      "x": 16,
+      "y": 4872,
+      "depth": 52642,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 4872
+      }
+    },
+    {
+      "index": 157,
+      "at": "$84D0",
+      "x": 56,
+      "y": 4872,
+      "depth": 51997,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 18,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 4872
+      }
+    },
+    {
+      "index": 158,
+      "at": "$84E0",
+      "x": 64,
+      "y": 4864,
+      "depth": 51995,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 4864
+      }
+    },
+    {
+      "index": 159,
+      "at": "$84F0",
+      "x": 0,
+      "y": 4568,
+      "depth": 57726,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 17,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 4568
+      }
+    },
+    {
+      "index": 160,
+      "at": "$8500",
+      "x": 24,
+      "y": 4544,
+      "depth": 57720,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 4544
+      }
+    },
+    {
+      "index": 161,
+      "at": "$8510",
+      "x": 24,
+      "y": 4552,
+      "depth": 57593,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 4552
+      }
+    },
+    {
+      "index": 162,
+      "at": "$8520",
+      "x": 16,
+      "y": 4552,
+      "depth": 57722,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 4552
+      }
+    },
+    {
+      "index": 163,
+      "at": "$8530",
+      "x": 72,
+      "y": 4568,
+      "depth": 56565,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 4568
+      }
+    },
+    {
+      "index": 164,
+      "at": "$8540",
+      "x": 48,
+      "y": 4544,
+      "depth": 57333,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4544
+      }
+    },
+    {
+      "index": 165,
+      "at": "$8550",
+      "x": 48,
+      "y": 4552,
+      "depth": 57206,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4552
+      }
+    },
+    {
+      "index": 166,
+      "at": "$8560",
+      "x": 56,
+      "y": 4552,
+      "depth": 57077,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 4552
+      }
+    },
+    {
+      "index": 167,
+      "at": "$8570",
+      "x": 16,
+      "y": 4584,
+      "depth": 57214,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 4584
+      }
+    },
+    {
+      "index": 168,
+      "at": "$8580",
+      "x": 24,
+      "y": 4584,
+      "depth": 57085,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 4584
+      }
+    },
+    {
+      "index": 169,
+      "at": "$8590",
+      "x": 24,
+      "y": 4592,
+      "depth": 56958,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 24,
+        "y": 4592
+      }
+    },
+    {
+      "index": 170,
+      "at": "$85A0",
+      "x": 48,
+      "y": 4584,
+      "depth": 56698,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4584
+      }
+    },
+    {
+      "index": 171,
+      "at": "$85B0",
+      "x": 56,
+      "y": 4584,
+      "depth": 56569,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 4584
+      }
+    },
+    {
+      "index": 172,
+      "at": "$85C0",
+      "x": 48,
+      "y": 4592,
+      "depth": 56571,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4592
+      }
+    },
+    {
+      "index": 173,
+      "at": "$85D0",
+      "x": 16,
+      "y": 4680,
+      "depth": 55690,
+      "cls": "$0750",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 4680
+      }
+    },
+    {
+      "index": 174,
+      "at": "$85E0",
+      "x": 60,
+      "y": 4680,
+      "depth": 54980,
+      "cls": "$0750",
+      "family": 7,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 154,
+      "extra": 0,
+      "spawn": {
+        "x": 60,
+        "y": 4680
+      }
+    },
+    {
+      "index": 175,
+      "at": "$85F0",
+      "x": 36,
+      "y": 4680,
+      "depth": 55367,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 2,
+      "phase": 8,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 36,
+        "y": 4680
+      }
+    },
+    {
+      "index": 176,
+      "at": "$8600",
+      "x": 32,
+      "y": 4440,
+      "depth": 59242,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 32,
+        "y": 4440
+      }
+    },
+    {
+      "index": 177,
+      "at": "$8610",
+      "x": 48,
+      "y": 4520,
+      "depth": 57714,
+      "cls": "$0330",
+      "family": 3,
+      "dir": 0,
+      "speed": 2,
+      "phase": 0,
+      "kind": 17,
+      "row": 66,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 4520
+      }
+    },
+    {
+      "index": 178,
+      "at": "$8620",
+      "x": 24,
+      "y": 4496,
+      "depth": 58482,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 1,
+      "speed": 2,
+      "phase": 0,
+      "kind": 16,
+      "row": 88,
+      "extra": 1,
+      "spawn": {
+        "x": 24,
+        "y": 4496
+      }
+    },
+    {
+      "index": 179,
+      "at": "$8630",
+      "x": 56,
+      "y": 4472,
+      "depth": 58347,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 0,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 88,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 4472
+      }
+    },
+    {
+      "index": 180,
+      "at": "$8640",
+      "x": 58,
+      "y": 5342,
+      "depth": 44503,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 58,
+        "y": 5342
+      }
+    },
+    {
+      "index": 181,
+      "at": "$8650",
+      "x": 60,
+      "y": 5360,
+      "depth": 44185,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 60,
+        "y": 5360
+      }
+    },
+    {
+      "index": 182,
+      "at": "$8660",
+      "x": 40,
+      "y": 5372,
+      "depth": 44317,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 40,
+        "y": 5372
+      }
+    },
+    {
+      "index": 183,
+      "at": "$8670",
+      "x": 2,
+      "y": 4944,
+      "depth": 51724,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 2,
+        "y": 4944
+      }
+    },
+    {
+      "index": 184,
+      "at": "$8680",
+      "x": 56,
+      "y": 5160,
+      "depth": 47425,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 1,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 110,
+      "extra": 1,
+      "spawn": {
+        "x": 56,
+        "y": 5160
+      }
+    },
+    {
+      "index": 185,
+      "at": "$8690",
+      "x": 40,
+      "y": 5174,
+      "depth": 47460,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 3,
+      "speed": 1,
+      "phase": 12,
+      "kind": 16,
+      "row": 110,
+      "extra": 3,
+      "spawn": {
+        "x": 40,
+        "y": 5174
+      }
+    },
+    {
+      "index": 186,
+      "at": "$86A0",
+      "x": 32,
+      "y": 5184,
+      "depth": 47431,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 0,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 32,
+        "y": 5184
+      }
+    },
+    {
+      "index": 187,
+      "at": "$86B0",
+      "x": 24,
+      "y": 5210,
+      "depth": 47147,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 5,
+      "speed": 1,
+      "phase": 4,
+      "kind": 16,
+      "row": 110,
+      "extra": 5,
+      "spawn": {
+        "x": 24,
+        "y": 5210
+      }
+    },
+    {
+      "index": 188,
+      "at": "$86C0",
+      "x": 60,
+      "y": 5214,
+      "depth": 46503,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 7,
+      "speed": 1,
+      "phase": 4,
+      "kind": 16,
+      "row": 110,
+      "extra": 7,
+      "spawn": {
+        "x": 60,
+        "y": 5214
+      }
+    },
+    {
+      "index": 189,
+      "at": "$86D0",
+      "x": 72,
+      "y": 5198,
+      "depth": 46563,
+      "cls": "$0540",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 12,
+      "kind": 16,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 72,
+        "y": 5198
+      }
+    },
+    {
+      "index": 190,
+      "at": "$86E0",
+      "x": 36,
+      "y": 5466,
+      "depth": 42889,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 12,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 36,
+        "y": 5466
+      }
+    },
+    {
+      "index": 191,
+      "at": "$86F0",
+      "x": 8,
+      "y": 5476,
+      "depth": 43182,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 8,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 8,
+        "y": 5476
+      }
+    },
+    {
+      "index": 192,
+      "at": "$8700",
+      "x": 24,
+      "y": 5476,
+      "depth": 42924,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 8,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 24,
+        "y": 5476
+      }
+    },
+    {
+      "index": 193,
+      "at": "$8710",
+      "x": 48,
+      "y": 5476,
+      "depth": 42537,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 8,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 48,
+        "y": 5476
+      }
+    },
+    {
+      "index": 194,
+      "at": "$8720",
+      "x": 64,
+      "y": 5476,
+      "depth": 42279,
+      "cls": "$1378",
+      "family": 3,
+      "dir": 4,
+      "speed": 2,
+      "phase": 8,
+      "kind": 19,
+      "row": 66,
+      "extra": 4,
+      "spawn": {
+        "x": 64,
+        "y": 5476
+      }
+    },
+    {
+      "index": 195,
+      "at": "$8730",
+      "x": 60,
+      "y": 5068,
+      "depth": 48821,
+      "cls": "$1A68",
+      "family": 10,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 220,
+      "extra": 0,
+      "spawn": {
+        "x": 60,
+        "y": 5068
+      }
+    },
+    {
+      "index": 196,
+      "at": "$8740",
+      "x": 36,
+      "y": 1288,
+      "depth": 43679,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 44,
+      "extra": 6,
+      "spawn": {
+        "x": 36,
+        "y": 1288
+      }
+    },
+    {
+      "index": 197,
+      "at": "$8750",
+      "x": 36,
+      "y": 1326,
+      "depth": 43076,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 2,
+      "speed": 1,
+      "phase": 4,
+      "kind": 18,
+      "row": 44,
+      "extra": 2,
+      "spawn": {
+        "x": 36,
+        "y": 1326
+      }
+    },
+    {
+      "index": 198,
+      "at": "$8760",
+      "x": 8,
+      "y": 1656,
+      "depth": 38289,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 1656
+      }
+    },
+    {
+      "index": 199,
+      "at": "$8770",
+      "x": 72,
+      "y": 1704,
+      "depth": 36495,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 17,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 1704
+      }
+    },
+    {
+      "index": 200,
+      "at": "$8780",
+      "x": 16,
+      "y": 1656,
+      "depth": 38160,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 1656
+      }
+    },
+    {
+      "index": 201,
+      "at": "$8790",
+      "x": 16,
+      "y": 4072,
+      "depth": 65342,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 0,
+      "speed": 2,
+      "phase": 0,
+      "kind": 16,
+      "row": 88,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 4072
+      }
+    },
+    {
+      "index": 202,
+      "at": "$87A0",
+      "x": 38,
+      "y": 4072,
+      "depth": 64987,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 0,
+      "speed": 2,
+      "phase": 4,
+      "kind": 15,
+      "row": 88,
+      "extra": 0,
+      "spawn": {
+        "x": 38,
+        "y": 4072
+      }
+    },
+    {
+      "index": 203,
+      "at": "$87B0",
+      "x": 64,
+      "y": 4072,
+      "depth": 64568,
+      "cls": "$0438",
+      "family": 4,
+      "dir": 3,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 88,
+      "extra": 3,
+      "spawn": {
+        "x": 64,
+        "y": 4072
+      }
+    },
+    {
+      "index": 204,
+      "at": "$87C0",
+      "x": 0,
+      "y": 4808,
+      "depth": 53916,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 0,
+        "y": 4808
+      }
+    },
+    {
+      "index": 205,
+      "at": "$87D0",
+      "x": 0,
+      "y": 4792,
+      "depth": 54170,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 0,
+        "y": 4792
+      }
+    },
+    {
+      "index": 206,
+      "at": "$87E0",
+      "x": 0,
+      "y": 4776,
+      "depth": 54424,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 0,
+        "y": 4776
+      }
+    },
+    {
+      "index": 207,
+      "at": "$87F0",
+      "x": 72,
+      "y": 4808,
+      "depth": 52755,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 72,
+        "y": 4808
+      }
+    },
+    {
+      "index": 208,
+      "at": "$8800",
+      "x": 72,
+      "y": 4792,
+      "depth": 53009,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 72,
+        "y": 4792
+      }
+    },
+    {
+      "index": 209,
+      "at": "$8810",
+      "x": 72,
+      "y": 4776,
+      "depth": 53263,
+      "cls": "$0228",
+      "family": 2,
+      "dir": 4,
+      "speed": 2,
+      "phase": 0,
+      "kind": 18,
+      "row": 44,
+      "extra": 4,
+      "spawn": {
+        "x": 72,
+        "y": 4776
+      }
+    },
+    {
+      "index": 210,
+      "at": "$8820",
+      "x": 0,
+      "y": 3584,
+      "depth": 7811,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 3584
+      }
+    },
+    {
+      "index": 211,
+      "at": "$8830",
+      "x": 8,
+      "y": 3584,
+      "depth": 7682,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 3584
+      }
+    },
+    {
+      "index": 212,
+      "at": "$8840",
+      "x": 64,
+      "y": 3640,
+      "depth": 5890,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 3640
+      }
+    },
+    {
+      "index": 213,
+      "at": "$8850",
+      "x": 72,
+      "y": 3640,
+      "depth": 5761,
+      "cls": "$0858",
+      "family": 8,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 176,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 3640
+      }
+    },
+    {
+      "index": 214,
+      "at": "$8860",
+      "x": 64,
+      "y": 3208,
+      "depth": 12748,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 64,
+        "y": 3208
+      }
+    },
+    {
+      "index": 215,
+      "at": "$8870",
+      "x": 8,
+      "y": 3224,
+      "depth": 13397,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 3224
+      }
+    },
+    {
+      "index": 216,
+      "at": "$8880",
+      "x": 0,
+      "y": 3232,
+      "depth": 13399,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 0,
+        "y": 3232
+      }
+    },
+    {
+      "index": 217,
+      "at": "$8890",
+      "x": 16,
+      "y": 3264,
+      "depth": 12633,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 16,
+        "y": 3264
+      }
+    },
+    {
+      "index": 218,
+      "at": "$88A0",
+      "x": 8,
+      "y": 3296,
+      "depth": 12254,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 8,
+        "y": 3296
+      }
+    },
+    {
+      "index": 219,
+      "at": "$88B0",
+      "x": 72,
+      "y": 3304,
+      "depth": 11095,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 72,
+        "y": 3304
+      }
+    },
+    {
+      "index": 220,
+      "at": "$88C0",
+      "x": 48,
+      "y": 3272,
+      "depth": 11990,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 48,
+        "y": 3272
+      }
+    },
+    {
+      "index": 221,
+      "at": "$88D0",
+      "x": 56,
+      "y": 3248,
+      "depth": 12242,
+      "cls": "$16E0",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 56,
+        "y": 3248
+      }
+    },
+    {
+      "index": 222,
+      "at": "$88E0",
+      "x": 6,
+      "y": 5506,
+      "depth": 42738,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 17,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 6,
+        "y": 5506
+      }
+    },
+    {
+      "index": 223,
+      "at": "$88F0",
+      "x": 21,
+      "y": 5507,
+      "depth": 42480,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 15,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 21,
+        "y": 5507
+      }
+    },
+    {
+      "index": 224,
+      "at": "$8900",
+      "x": 36,
+      "y": 5498,
+      "depth": 42381,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 18,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 5498
+      }
+    },
+    {
+      "index": 225,
+      "at": "$8910",
+      "x": 51,
+      "y": 5507,
+      "depth": 41997,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 16,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 51,
+        "y": 5507
+      }
+    },
+    {
+      "index": 226,
+      "at": "$8920",
+      "x": 66,
+      "y": 5506,
+      "depth": 41771,
+      "cls": "$0648",
+      "family": 6,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 17,
+      "row": 132,
+      "extra": 0,
+      "spawn": {
+        "x": 66,
+        "y": 5506
+      }
+    },
+    {
+      "index": 227,
+      "at": "$8930",
+      "x": 40,
+      "y": 5516,
+      "depth": 42031,
+      "cls": "$1528",
+      "family": 5,
+      "dir": 2,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 110,
+      "extra": 2,
+      "spawn": {
+        "x": 40,
+        "y": 5516
+      }
+    },
+    {
+      "index": 228,
+      "at": "$8940",
+      "x": 6,
+      "y": 5506,
+      "depth": 42738,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 8,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 6,
+        "y": 5506
+      }
+    },
+    {
+      "index": 229,
+      "at": "$8950",
+      "x": 21,
+      "y": 5507,
+      "depth": 42480,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 21,
+        "y": 5507
+      }
+    },
+    {
+      "index": 230,
+      "at": "$8960",
+      "x": 36,
+      "y": 5506,
+      "depth": 42254,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 36,
+        "y": 5506
+      }
+    },
+    {
+      "index": 231,
+      "at": "$8970",
+      "x": 51,
+      "y": 5507,
+      "depth": 41997,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 51,
+        "y": 5507
+      }
+    },
+    {
+      "index": 232,
+      "at": "$8980",
+      "x": 66,
+      "y": 5506,
+      "depth": 41771,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 0,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 66,
+        "y": 5506
+      }
+    },
+    {
+      "index": 233,
+      "at": "$8990",
+      "x": 40,
+      "y": 5628,
+      "depth": 40253,
+      "cls": "$1528",
+      "family": 5,
+      "dir": 6,
+      "speed": 1,
+      "phase": 8,
+      "kind": 18,
+      "row": 110,
+      "extra": 6,
+      "spawn": {
+        "x": 40,
+        "y": 5628
+      }
+    },
+    {
+      "index": 234,
+      "at": "$89A0",
+      "x": 6,
+      "y": 152,
+      "depth": 62197,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 6,
+        "y": 152
+      }
+    },
+    {
+      "index": 235,
+      "at": "$89B0",
+      "x": 18,
+      "y": 152,
+      "depth": 62003,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 18,
+        "y": 152
+      }
+    },
+    {
+      "index": 236,
+      "at": "$89C0",
+      "x": 30,
+      "y": 152,
+      "depth": 61810,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 30,
+        "y": 152
+      }
+    },
+    {
+      "index": 237,
+      "at": "$89D0",
+      "x": 42,
+      "y": 152,
+      "depth": 61616,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 42,
+        "y": 152
+      }
+    },
+    {
+      "index": 238,
+      "at": "$89E0",
+      "x": 54,
+      "y": 152,
+      "depth": 61423,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 4,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 54,
+        "y": 152
+      }
+    },
+    {
+      "index": 239,
+      "at": "$89F0",
+      "x": 66,
+      "y": 152,
+      "depth": 61229,
+      "cls": "$19F0",
+      "family": 9,
+      "dir": 0,
+      "speed": 0,
+      "phase": 12,
+      "kind": 13,
+      "row": 198,
+      "extra": 0,
+      "spawn": {
+        "x": 66,
+        "y": 152
+      }
+    }
+  ],
+  "raw": "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",
+  "summary": {
+    "families": {
+      "2": 18,
+      "3": 31,
+      "4": 16,
+      "5": 26,
+      "6": 67,
+      "7": 10,
+      "8": 9,
+      "9": 11,
+      "10": 52
+    },
+    "classes": {
+      "$0228": 18,
+      "$0330": 14,
+      "$0438": 16,
+      "$0540": 24,
+      "$0648": 23,
+      "$0750": 2,
+      "$0858": 7,
+      "$0A60": 25,
+      "$1378": 17,
+      "$1528": 2,
+      "$16E0": 44,
+      "$17F8": 8,
+      "$18E8": 2,
+      "$19F0": 11,
+      "$1A68": 27
+    },
+    "kinds": {
+      "13": 126,
+      "15": 8,
+      "16": 42,
+      "17": 18,
+      "18": 30,
+      "19": 16
+    },
+    "speeds": {
+      "0": 149,
+      "1": 52,
+      "2": 39
+    },
+    "y": {
+      "min": 152,
+      "max": 5628
+    },
+    "byZone": {
+      "0": 6,
+      "2": 6,
+      "3": 5,
+      "4": 7,
+      "5": 6,
+      "6": 7,
+      "7": 16,
+      "8": 6,
+      "9": 8,
+      "10": 14,
+      "11": 6,
+      "12": 7,
+      "13": 4,
+      "14": 6,
+      "15": 5,
+      "16": 6,
+      "17": 12,
+      "18": 11,
+      "19": 3,
+      "20": 4,
+      "21": 12,
+      "22": 3,
+      "23": 7,
+      "24": 8,
+      "25": 13,
+      "26": 9,
+      "27": 10,
+      "28": 7,
+      "29": 6,
+      "30": 3,
+      "31": 17
+    },
+    "zoneLength": 176,
+    "zoneNote": "zóna = y // 176 je aritmetika z objects.json, ne změřené pravidlo načítání: tabulka podle y **není seřazená** (69 míst, kde y klesne), takže index záznamu a číslo zóny spolu přímo nesouvisí. Co z toho hra při přechodu bere, je zones.json."
+  },
+  "verification": {
+    "formatHolds": {
+      "rowIsFamilyTimes22": true,
+      "spawnIsRecordPosition": true,
+      "exceptions": []
+    },
+    "againstRuntimeImage": {
+      "file": "build/highwayencounter-run.bin",
+      "bytesEqual": 3840,
+      "bytes": 3840
+    },
+    "againstLiveTable": {
+      "live": 18,
+      "positionAndClass": 12,
+      "notFound": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "bytes0to13Identical": 12,
+      "tailIsPointerToRecord": 12,
+      "differingOffsets": {
+        "14": 12,
+        "15": 12
+      },
+      "pairs": [
+        {
+          "slot": 9,
+          "record": 5,
+          "pointer": "$7B50"
+        },
+        {
+          "slot": 10,
+          "record": 6,
+          "pointer": "$7B60"
+        },
+        {
+          "slot": 11,
+          "record": 7,
+          "pointer": "$7B70"
+        },
+        {
+          "slot": 12,
+          "record": 8,
+          "pointer": "$7B80"
+        },
+        {
+          "slot": 13,
+          "record": 9,
+          "pointer": "$7B90"
+        },
+        {
+          "slot": 14,
+          "record": 10,
+          "pointer": "$7BA0"
+        },
+        {
+          "slot": 15,
+          "record": 234,
+          "pointer": "$89A0"
+        },
+        {
+          "slot": 16,
+          "record": 235,
+          "pointer": "$89B0"
+        },
+        {
+          "slot": 17,
+          "record": 236,
+          "pointer": "$89C0"
+        },
+        {
+          "slot": 18,
+          "record": 237,
+          "pointer": "$89D0"
+        },
+        {
+          "slot": 19,
+          "record": 238,
+          "pointer": "$89E0"
+        },
+        {
+          "slot": 20,
+          "record": 239,
+          "pointer": "$89F0"
+        }
+      ],
+      "liveTableAt": "$8A00"
+    },
+    "unchangedInsideZone": {
+      "passes": 200,
+      "bytesChanged": 0,
+      "note": "uvnitř zóny se tabulka nemění; při přechodu do ní hra ukládá stav živých záznamů zpátky ($92CE, data/zones.json)"
+    }
+  },
+  "open": [
+    "který druh je barel, bedna, skleněná krychle nebo zeď – to řekne až spárování se sprity (spriteframes.json)"
+  ]
+}

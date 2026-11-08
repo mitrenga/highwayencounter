@@ -1,0 +1,158 @@
+{
+ "note": "Bodování a číslice SCORE/HIGH originálu. Skóre je šest číslic a sedmá je nakreslená v panelu, takže je vždycky násobek deseti. Číslice mají vlastní pětibajtové písmo, jiné než data/font.json.",
+ "source": "tools/dumpscore.py, build/gameplay.z80",
+ "digits": 6,
+ "store": {
+  "score": "$A481",
+  "high": "$A489",
+  "terminator": "$FF",
+  "tail": "$A487",
+  "blank": 0,
+  "first": 1,
+  "last": 10,
+  "note": "Číslice je 1 až 10 pro 0 až 9; 0 znamená prázdno, a proto se vedoucí nuly nekreslí. Sedmý bajt se neukazuje."
+ },
+ "unit": 10,
+ "awards": [
+  {
+   "at": "$9BF3",
+   "add": 1,
+   "points": 10,
+   "what": "postup",
+   "note": "jediné místo mimo zánik a konec hry; přičte se, když je $8F16 rovno 4",
+   "measured": 10
+  },
+  {
+   "at": "$9F18",
+   "add": 25,
+   "points": 250,
+   "what": "zánik",
+   "note": "zničený záznam rodiny 1 až 6 – tentýž skok, který si říká o zvuk `blast`",
+   "measured": 250
+  },
+  {
+   "at": "$9F6E",
+   "add": 25,
+   "points": 250,
+   "what": "zánik",
+   "note": "druhá větev téhož zániku",
+   "measured": 250
+  },
+  {
+   "at": "$A632",
+   "add": 100,
+   "points": 1000,
+   "what": "dohráno",
+   "note": "koncová sekvence, hned u zvuku `destroy` (M7)",
+   "measured": 1000
+  }
+ ],
+ "high": {
+  "kept": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   5
+  ],
+  "taken": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   9
+  ],
+  "at": "$A450",
+  "when": "$90F2",
+  "note": "HIGH se přepisuje na **začátku nové hry**: nejdřív se porovná sedm bajtů skóre se sedmi bajty HIGH a při větším se zkopírují, a teprve pak se skóre vynuluje. Proto ho žádný měřený běh nepřepsal."
+ },
+ "glyphs": {
+  "at": "$A490",
+  "rows": 5,
+  "bytes": "/v7+/v6Curq6gvr6+vr6gvqCvoKC+oL6grq6gvr6gr6C+oKCvoK6goL6+vr6grqCuoKCuoL6gg==",
+  "note": "deset glyfů po pěti bajtech, index je hodnota číslice; nultý je prázdno"
+ },
+ "cells": {
+  "score": {
+   "row": 20,
+   "col": 29,
+   "line": 2,
+   "at": "$529D"
+  },
+  "high": {
+   "row": 22,
+   "col": 29,
+   "line": 1,
+   "at": "$51DD"
+  },
+  "direction": "zprava doleva",
+  "pictures": {
+   "6": "AP6CvoL6gv4=",
+   "5": "AP66uoL6+v4=",
+   "4": "AP6C+oL6gv4=",
+   "3": "AP6C+oK+gv4=",
+   "2": "AP76+vr6+v4=",
+   "1": "AP6Curq6gv4=",
+   "7": "AP6CvoK6gv4=",
+   "9": "AP6CuoK6gv4=",
+   "8": "AP6C+vr6+v4=",
+   "10": "AP6CuoL6gv4="
+  },
+  "note": "Kreslí se zprava doleva od uvedené buňky, pět pixelových řádek od `line`. `pictures` je celá buňka tak, jak ji originál nechal – osm bajtů, takže je v ní i to, co kolem glyfu už na panelu bylo."
+ },
+ "power": {
+  "cells": [
+   "$5A94",
+   "$5A95",
+   "$5A96"
+  ],
+  "row": 20,
+  "cols": [
+   20,
+   21,
+   22
+  ],
+  "pointer": "$8F18",
+  "page": "$5A",
+  "full": "$44",
+  "empty": "$00",
+  "spend": "$A1EF",
+  "refill": "$A10B",
+  "pointerSeen": [
+   147,
+   148,
+   149
+  ],
+  "moved": [
+   "$5A94",
+   "$5A95"
+  ],
+  "note": "POWER není energie, je to zásobník výstřelů. $8F18 je dolní bajt adresy v atributech; výstřel ho o jedna sníží a do buňky zapíše prázdno, a jakmile výstřel dojede, $A10B ho zvýší a zapíše plno. Dílek je plný právě tehdy, když jeho adresa není za ukazatelem – ověřeno na každém naměřeném snímku."
+ },
+ "lamp": {
+  "cells": [
+   "$5A90",
+   "$5A91"
+  ],
+  "row": 20,
+  "cols": [
+   16,
+   17
+  ],
+  "on": "$42",
+  "off": "$00",
+  "counter": "$8F16",
+  "note": "Dvě buňky, o kterých screen_layout.md §4 psal jen, že jsou černé. Rozsvítí se ($42) v tomtéž průchodu, ve kterém se přičte deset bodů za doprovod Lasertronu, a zhasnou, jakmile se doprovod přeruší nebo počítadlo $8F16 přeteče – takže blikají po dobu doprovodu."
+ },
+ "verification": {
+  "digitsDrawn": 72,
+  "differences": 0,
+  "note": "číslice se zapsaly do paměti, nechal je nakreslit originál a porovnalo se to s tabulkou glyfů"
+ },
+ "open": [
+  "přesné pravidlo doprovodu Lasertronu ($9B72–$9BF5): z kódu je vidět, že se prochází nejvýš čtyři záznamy zpět od Lasertronu a hledá se Vorton do 16 jednotek za ním, ale změřené to není – proto port těch deset bodů zatím nepřičítá a matchsound.js je počítá zvlášť",
+  "ukazatel TIME: kde přesně ubývá dílek, měřila M6 ($8F19), ale pixelově porovnaný není – v žádném naměřeném běhu se neubral"
+ ]
+}

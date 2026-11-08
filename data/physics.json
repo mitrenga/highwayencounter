@@ -1,0 +1,167 @@
+{
+ "note": "Fyzika řízeného Vortona, odměřená z běžícího originálu (tools/dumpphysics.py). Souřadnice je táž světová souřadnice, ve které roste okno světa $8F05; jeden krok = jeden průchod hlavní smyčkou hry, ne jeden snímek.",
+ "source": "tools/dumpphysics.py, build/gameplay.z80",
+ "units": {
+  "coordinate": "světová souřadnice; při rychlosti 1 se mění o 2 na krok",
+  "zoneLength": 176,
+  "step": "jeden průchod hlavní smyčkou hry"
+ },
+ "directions": {
+  "0": [
+   0,
+   2
+  ],
+  "1": [
+   -1,
+   1
+  ],
+  "2": [
+   -2,
+   0
+  ],
+  "3": [
+   -1,
+   -1
+  ],
+  "4": [
+   0,
+   -2
+  ],
+  "5": [
+   1,
+   -1
+  ],
+  "6": [
+   2,
+   0
+  ],
+  "7": [
+   1,
+   1
+  ]
+ },
+ "phase": {
+  "mask": 15,
+  "perDirectionPerSpeed": {
+   "0": 4,
+   "1": 4,
+   "2": 4,
+   "3": 0,
+   "4": -4,
+   "5": -4,
+   "6": -4,
+   "7": 0
+  },
+  "note": "o kolik se posune fáze animace za krok na jednotku rychlosti; ve směrech 3 a 7 se koule jeví, že se nevalí"
+ },
+ "speed": {
+  "max": 2,
+  "min": 0,
+  "stepsPerChange": [
+   8
+  ],
+  "firstChangeImmediate": true,
+  "coastsForever": true
+ },
+ "thrustTimer": {
+  "address": 36637,
+  "reload": 255,
+  "shiftRightEachStep": true,
+  "sequence": [
+   255,
+   127,
+   63,
+   31,
+   15,
+   7,
+   3,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "note": "nabije se na reload při každé změně rychlosti a posouvá se doprava každý krok, i když Vorton stojí; další změna přijde, až je nula – tedy za osm kroků"
+ },
+ "turning": {
+  "left": {
+   "stepsChanged": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19
+   ],
+   "phaseWhenTurned": [
+    2
+   ],
+   "delta": -1
+  },
+  "right": {
+   "stepsChanged": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19
+   ],
+   "phaseWhenTurned": [
+    2
+   ],
+   "delta": 1
+  },
+  "bothKeysTurns": false,
+  "everyNSteps": 2,
+  "phaseByte": 36627
+ },
+ "collision": {
+  "road": {
+   "minX": 0,
+   "maxX": 72
+  },
+  "speedDropOnHit": [
+   1
+  ],
+  "timerAfterHit": {
+   "0": 0,
+   "1": 4
+  },
+  "timerReload": 4,
+  "onBlocked": "krok se zahodí celý (x i y), fáze animace se neposune, rychlost klesne o 1 a časovač plynu se nastaví na timerReload – nebo na 0, když je rychlost po nárazu nulová"
+ },
+ "keys": {
+  "address": 36628,
+  "fire": 1,
+  "accelerate": 2,
+  "decelerate": 4,
+  "right": 8,
+  "left": 16
+ },
+ "spawn": {
+  "x": 36,
+  "y": 242,
+  "cls": 0,
+  "dir": 0,
+  "speed": 0,
+  "phase": 12,
+  "kind": 14
+ },
+ "stepLength": {
+  "min": 97577,
+  "max": 931171,
+  "median": 168293,
+  "mean": 180728,
+  "frameTstates": 69888,
+  "framesPerStepMean": 2.586
+ }
+}

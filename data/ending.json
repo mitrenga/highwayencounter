@@ -1,0 +1,816 @@
+{
+ "source": "tools/dumpending.py",
+ "note": "koncová sekvence v Zone Zero a druhý průchod. Sekvence si hru řídí sama – píše si, co hra ten průchod „zmáčkla\" ($8F14) – takže je od spuštění deterministická a měří se krokováním, ne přehráváním vstupů.",
+ "from": {
+  "rzx": "sources/tape/highway.rzx",
+  "frame": 77700,
+  "snapshot": "build/ending.z80"
+ },
+ "trigger": {
+  "at": "$9172",
+  "zoneCounterAtLeast": 30,
+  "lasertronY": 5484,
+  "window": 256,
+  "note": "hlavní smyčka se každý průchod ptá, jestli je počítadlo zón aspoň 30 a `y` Lasertronu v okně 256 jednotek od 5484 – to je 204 jednotek za začátkem Zone Zero (30 × 176 = 5280). Spouští to Lasertron, ne hráč.",
+  "measured": {
+   "zoneCounter": 30,
+   "lasertronY": 5484,
+   "entities": [
+    "27 37 15 85 a9 00 00 00 01 00 0e 00 00 24 b0 00",
+    "24 44 15 e7 a8 70 10 00 01 00 0d 00 00 18 58 00",
+    "24 4e 15 48 a8 70 10 00 01 04 0d 00 00 30 64 00",
+    "24 58 15 a9 a7 70 10 00 01 08 0d 00 00 18 70 00",
+    "24 62 15 0a a7 70 10 00 01 0c 0d 00 00 30 7c 00",
+    "24 6c 15 6c a6 10 09 00 01 00 0d c6 00 24 c0 00"
+   ]
+  }
+ },
+ "script": {
+  "constants": {
+   "saluteEntities": {
+    "value": 5,
+    "at": "$A618",
+    "note": "kolik prvních záznamů se pošle do zániku"
+   },
+   "saluteKind": {
+    "value": 128,
+    "at": "$A62B",
+    "note": "druh, na který se přepíšou (spodní bajt)"
+   },
+   "salutePasses": {
+    "value": 24,
+    "at": "$A644",
+    "note": "průchodů po zániku pětice"
+   },
+   "afterPointerPasses": {
+    "value": 15,
+    "at": "$A650",
+    "note": "průchodů po posunu ukazatele tabulky"
+   },
+   "lasertronSpeed": {
+    "value": 1,
+    "at": "$A6B0",
+    "note": "rychlost, kterou Lasertron dostane"
+   },
+   "endZoneLast": {
+    "value": 36,
+    "at": "$A6B8",
+    "note": "do jaké hodnoty $8F1C se jede"
+   },
+   "clearPasses": {
+    "value": 20,
+    "at": "$A6D1",
+    "note": "průchodů po smazání obrazu"
+   },
+   "shapeSteps": {
+    "value": 3,
+    "at": "$A6D7",
+    "note": "kolikrát se druh Lasertronu posune"
+   },
+   "shapePasses": {
+    "value": 3,
+    "at": "$A6D9",
+    "note": "průchodů na jeden posun"
+   },
+   "afterShapePasses": {
+    "value": 20,
+    "at": "$A6EA",
+    "note": "průchodů po přeměně"
+   },
+   "patchDuringExplosion": {
+    "value": 6,
+    "at": "$A700",
+    "note": "bajt, který si sekvence zapíše do instrukce na $A1CE (co vybírá, změřené není – je to uvnitř kreslení, tedy M8)"
+   },
+   "explosionPasses": {
+    "value": 60,
+    "at": "$A705",
+    "note": "průchodů výbuchu"
+   },
+   "explosionKeys": {
+    "value": 1,
+    "at": "$A707",
+    "note": "co si hra ty průchody „mačká\" ($8F14)"
+   },
+   "afterExplosionPasses": {
+    "value": 8,
+    "at": "$A70C",
+    "note": "průchodů po výbuchu"
+   },
+   "patchBack": {
+    "value": 22,
+    "at": "$A712",
+    "note": "a co tam zapíše zpátky ($16, jak to stojí v kódu na $A1CE)"
+   },
+   "whiteAttr": {
+    "value": 71,
+    "at": "$A71D",
+    "note": "atribut, kterým se hrací plocha zabělí"
+   },
+   "plainAttr": {
+    "value": 7,
+    "at": "$A7BC",
+    "note": "atribut zpátky"
+   },
+   "rewindSteps": {
+    "value": 3,
+    "at": "$A7E6",
+    "note": "kolikrát se druh posune zpátky"
+   },
+   "rewindPasses": {
+    "value": 3,
+    "at": "$A7E8",
+    "note": "průchodů na jeden posun"
+   },
+   "afterRewindPasses": {
+    "value": 20,
+    "at": "$A7F9",
+    "note": "průchodů po zpětné přeměně"
+   },
+   "finalePasses": {
+    "value": 190,
+    "at": "$A807",
+    "note": "průchodů závěru"
+   },
+   "textAtPass": {
+    "value": 135,
+    "at": "$A814",
+    "note": "na které hodnotě čítače se vysází text"
+   },
+   "passCap": {
+    "value": 2,
+    "at": "$A825",
+    "note": "nejvyšší hodnota počítadla $8F89"
+   },
+   "familyLimit": {
+    "value": 5,
+    "at": "$A837",
+    "note": "rodiny **pod** touhle hranicí se zrychlují"
+   },
+   "explosionRecords": {
+    "value": 3,
+    "at": "$A6F9",
+    "note": "kolik záznamů dostane při výbuchu jiný druh"
+   },
+   "explosionKind": {
+    "value": 32,
+    "at": "$A6FB",
+    "note": "a jaký (spodní bajt)"
+   },
+   "finaleKind": {
+    "value": 128,
+    "at": "$A805",
+    "note": "druh, na který se Lasertron přepíše v závěru"
+   },
+   "explosionFirst": {
+    "value": 6,
+    "address": "$8A65",
+    "offset": 5,
+    "at": "$A6F6",
+    "note": "první ze záznamů, které při výbuchu dostanou jiný druh"
+   },
+   "tableEndAt": {
+    "value": 9,
+    "address": "$8A90",
+    "offset": 0,
+    "at": "$A7E1",
+    "note": "kam se po výbuchu zkrátí konec tabulky"
+   },
+   "finaleKindAt": {
+    "value": 5,
+    "address": "$8A55",
+    "offset": 5,
+    "at": "$A802",
+    "note": "čí druh se v závěru přepíše"
+   },
+   "finaleDeadAt": {
+    "value": 5,
+    "address": "$8A58",
+    "offset": 8,
+    "at": "$A80A",
+    "note": "čí rychlosti se v závěru každý průchod nastaví horní bit"
+   }
+  },
+  "phases": [
+   {
+    "name": "trigger",
+    "at": "$A617",
+    "note": "sekvence začíná: prvních pět záznamů (konvoj) dostane druh $80 a bit 7 rychlosti – to je animace zániku z §16",
+    "frame": 53,
+    "framesSincePrevious": null,
+    "zoneCopy": 30,
+    "tablePointer": "$8A00"
+   },
+   {
+    "name": "salute",
+    "at": "$A643",
+    "note": "pět Vortonů odchází",
+    "frame": 53,
+    "framesSincePrevious": 0,
+    "zoneCopy": 30,
+    "tablePointer": "$8A00"
+   },
+   {
+    "name": "lasertronAlone",
+    "at": "$A649",
+    "note": "Lasertron zůstal sám; ukazatel tabulky $8F01 se posune na $8A50, takže se z něj stane nultý záznam",
+    "frame": 130,
+    "framesSincePrevious": 77,
+    "zoneCopy": 30,
+    "tablePointer": "$8A00"
+   },
+   {
+    "name": "panelMessage",
+    "at": "$A667",
+    "note": "do panelu se na místo pole ZONE vykreslí hláška LASERTRON ACTIVATED (obrázek z $A875, atribut $BA – bliká)",
+    "frame": 175,
+    "framesSincePrevious": 45,
+    "zoneCopy": 31,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "lasertronRuns",
+    "at": "$A694",
+    "note": "Lasertron dostane rychlost 1 a jede sám",
+    "frame": 175,
+    "framesSincePrevious": 0,
+    "zoneCopy": 31,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "endZonesDone",
+    "at": "$A6BB",
+    "note": "dojel: $8F1C došlo na 36, tedy pět zón za Zone Zero",
+    "frame": 1252,
+    "framesSincePrevious": 1077,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "clear",
+    "at": "$A6D0",
+    "note": "obraz se smaže podle seznamu na $5BD7",
+    "frame": 1252,
+    "framesSincePrevious": 0,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "explosion",
+    "at": "$A6FF",
+    "note": "Lasertron se rozloží a vybuchne",
+    "frame": 1359,
+    "framesSincePrevious": 107,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "whiteOut",
+    "at": "$A716",
+    "note": "atributy celé hrací plochy zbělají ($47)",
+    "frame": 1546,
+    "framesSincePrevious": 187,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "shipBreakup",
+    "at": "$A723",
+    "note": "rozpad lodi – kreslí se ze scénáře na $A84B, bez průchodů hlavní smyčky",
+    "frame": 1546,
+    "framesSincePrevious": 0,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "afterBreakup",
+    "at": "$A7B5",
+    "note": "atributy zpátky na $07 a dlouhá prodleva",
+    "frame": 1640,
+    "framesSincePrevious": 94,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "rewind",
+    "at": "$A7E0",
+    "note": "konec tabulky se zkrátí na $8A90 a animace se přehraje pozpátku",
+    "frame": 1656,
+    "framesSincePrevious": 16,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "finale",
+    "at": "$A806",
+    "note": "190 průchodů, ve kterých se po 55. vysází text",
+    "frame": 1719,
+    "framesSincePrevious": 63,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "text",
+    "at": "$A818",
+    "note": "PREPARE YOURSELF FOR THE NEXT HIGHWAY ENCOUNTER!",
+    "frame": 1848,
+    "framesSincePrevious": 129,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "secondPass",
+    "at": "$A821",
+    "note": "počítadlo $8F89 a zrychlení tabulky silnice",
+    "frame": 2133,
+    "framesSincePrevious": 285,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   },
+   {
+    "name": "newGame",
+    "at": "$9107",
+    "note": "zpátky do hry – nová hra na tvrdší silnici",
+    "frame": 2134,
+    "framesSincePrevious": 1,
+    "zoneCopy": 36,
+    "tablePointer": "$8A50"
+   }
+  ],
+  "totalFrames": 2081,
+  "note": "`framesSincePrevious` je změřený čas mezi dvěma body scénáře; počty **průchodů** jsou v `constants` a čtou se z kódu. Průchod trvá 2,4 snímku (§11), takže se dají porovnat."
+ },
+ "endZones": {
+  "zoneCopy": "$8F1C",
+  "last": 36,
+  "note": "Zone Zero (počítadlo 31) není poslední: sekvence nechá Lasertron jet, dokud $8F1C nedojede na 36, tedy přes dalších pět zón, které normální hra nikdy neukáže."
+ },
+ "secondPass": {
+  "counter": "$8F89",
+  "counterBefore": 0,
+  "counterAfter": 1,
+  "cap": 2,
+  "masterTable": {
+   "start": "$7B00",
+   "end": "$8A00",
+   "stride": 16,
+   "records": 240
+  },
+  "speedOffset": 8,
+  "speedDelta": 1,
+  "familyBelow": 5,
+  "resetRoutine": "$8F8A",
+  "measured": {
+   "changedBytes": 65,
+   "byOffset": {
+    "8": 65
+   },
+   "byFamily": {
+    "2": 18,
+    "3": 31,
+    "4": 16
+   },
+   "deltas": {
+    "1": 65
+   },
+   "familiesInTable": {
+    "2": 18,
+    "3": 31,
+    "4": 16,
+    "5": 26,
+    "6": 67,
+    "7": 10,
+    "8": 9,
+    "9": 11,
+    "10": 52
+   }
+  },
+  "note": "celý „harder highway encounter\" je tohle: rychlost (+8) o 1 výš každému záznamu tabulky silnice, jehož rodina je pod 5. Miny (rodina 5) tedy rychlejší **nejsou**. Při nové hře to $8F8A stejným průchodem odečte zpátky.",
+  "open": [
+   "strop počítadla (2) je přečtený z kódu ($A825), ne změřený: RZX záznam má jedno dohrání, ne tři"
+  ]
+ },
+ "text": {
+  "ending": [
+   {
+    "screen": "$40E8",
+    "attributes": "$58E8",
+    "codes": [
+     224,
+     226,
+     213,
+     224,
+     209,
+     226,
+     213,
+     205,
+     233,
+     223,
+     229,
+     226,
+     227,
+     213,
+     220,
+     214
+    ],
+    "text": "PREPARE YOURSELF"
+   },
+   {
+    "screen": "$4808",
+    "attributes": "$5908",
+    "codes": [
+     202,
+     205,
+     214,
+     223,
+     226,
+     205,
+     228,
+     216,
+     213,
+     205,
+     222,
+     213,
+     232,
+     228,
+     205,
+     202
+    ],
+    "text": "  FOR THE NEXT  "
+   },
+   {
+    "screen": "$4826",
+    "attributes": "$5926",
+    "codes": [
+     138,
+     216,
+     217,
+     215,
+     216,
+     231,
+     209,
+     233,
+     205,
+     213,
+     222,
+     211,
+     223,
+     229,
+     222,
+     228,
+     213,
+     226,
+     208,
+     138
+    ],
+    "text": " HIGHWAY ENCOUNTER! "
+   }
+  ],
+  "messages": {
+   "missionAborted": [
+    {
+     "screen": "$4807",
+     "attributes": "$5907",
+     "codes": [
+      138,
+      93,
+      89,
+      99,
+      99,
+      89,
+      95,
+      94,
+      77,
+      81,
+      82,
+      95,
+      98,
+      100,
+      85,
+      84,
+      138
+     ],
+     "text": " MISSION ABORTED "
+    }
+   ],
+   "tooLate": [
+    {
+     "screen": "$40EA",
+     "attributes": "$58EA",
+     "codes": [
+      138,
+      77,
+      100,
+      95,
+      95,
+      77,
+      92,
+      81,
+      100,
+      85,
+      77,
+      138
+     ],
+     "text": "  TOO LATE  "
+    },
+    {
+     "screen": "$4806",
+     "attributes": "$5906",
+     "codes": [
+      138,
+      93,
+      89,
+      99,
+      99,
+      89,
+      95,
+      94,
+      77,
+      100,
+      85,
+      98,
+      93,
+      89,
+      94,
+      81,
+      100,
+      85,
+      84,
+      138
+     ],
+     "text": " MISSION TERMINATED "
+    }
+   ],
+   "gameOver": [
+    {
+     "screen": "$40CA",
+     "attributes": "$58CA",
+     "codes": [
+      202,
+      87,
+      81,
+      93,
+      85,
+      77,
+      95,
+      102,
+      85,
+      98,
+      202
+     ],
+     "text": " GAME OVER "
+    },
+    {
+     "screen": "$4809",
+     "attributes": "$5909",
+     "codes": [
+      138,
+      81,
+      92,
+      92,
+      77,
+      102,
+      95,
+      98,
+      100,
+      95,
+      94,
+      99,
+      138
+     ],
+     "text": " ALL VORTONS "
+    },
+    {
+     "screen": "$4829",
+     "attributes": "$5929",
+     "codes": [
+      138,
+      77,
+      84,
+      85,
+      99,
+      100,
+      98,
+      95,
+      105,
+      85,
+      84,
+      77,
+      138
+     ],
+     "text": "  DESTROYED  "
+    }
+   ],
+   "pauseMode": [
+    {
+     "screen": "$480A",
+     "attributes": "$590A",
+     "codes": [
+      202,
+      96,
+      81,
+      101,
+      99,
+      85,
+      77,
+      93,
+      95,
+      84,
+      85,
+      202
+     ],
+     "text": " PAUSE MODE "
+    },
+    {
+     "screen": "$4827",
+     "attributes": "$5927",
+     "codes": [
+      138,
+      96,
+      98,
+      85,
+      99,
+      99,
+      77,
+      92,
+      77,
+      100,
+      95,
+      77,
+      92,
+      85,
+      81,
+      102,
+      85,
+      138
+     ],
+     "text": " PRESS L TO LEAVE "
+    }
+   ]
+  },
+  "demoEnd": [
+   {
+    "screen": "$40AB",
+    "attributes": "$58AB",
+    "codes": [
+     74,
+     100,
+     88,
+     85,
+     98,
+     85,
+     77,
+     89,
+     99,
+     74
+    ],
+    "text": " THERE IS "
+   },
+   {
+    "screen": "$40C9",
+    "attributes": "$58C9",
+    "codes": [
+     74,
+     95,
+     94,
+     92,
+     105,
+     77,
+     95,
+     94,
+     85,
+     77,
+     103,
+     81,
+     105,
+     74
+    ],
+    "text": " ONLY ONE WAY "
+   },
+   {
+    "screen": "$40E9",
+    "attributes": "$58E9",
+    "codes": [
+     74,
+     100,
+     95,
+     77,
+     85,
+     94,
+     83,
+     95,
+     101,
+     94,
+     100,
+     85,
+     98,
+     74
+    ],
+    "text": " TO ENCOUNTER "
+   },
+   {
+    "screen": "$4807",
+    "attributes": "$5907",
+    "codes": [
+     74,
+     103,
+     88,
+     81,
+     100,
+     77,
+     92,
+     89,
+     85,
+     99,
+     77,
+     82,
+     85,
+     105,
+     95,
+     94,
+     84,
+     74
+    ],
+    "text": " WHAT LIES BEYOND "
+   },
+   {
+    "screen": "$482A",
+    "attributes": "$592A",
+    "codes": [
+     74,
+     106,
+     95,
+     94,
+     85,
+     77,
+     106,
+     85,
+     98,
+     95,
+     80,
+     74
+    ],
+    "text": " ZONE ZERO! "
+   },
+   {
+    "screen": "$4866",
+    "attributes": "$5966",
+    "codes": [
+     202,
+     99,
+     95,
+     77,
+     87,
+     85,
+     100,
+     77,
+     95,
+     94,
+     77,
+     103,
+     89,
+     100,
+     88,
+     77,
+     89,
+     100,
+     80,
+     202
+    ],
+    "text": " SO GET ON WITH IT! "
+   }
+  ],
+  "note": "texty se sázejí rutinou $B890 znakovou sadou z data/font.json; `codes` jsou bajty tak, jak leží v paměti (bity 6 a 7 vybírají barvu)"
+ },
+ "panel": {
+  "row": 19,
+  "rows": 5,
+  "bitmap": "A//////D////////////////w////////////////8ACAAAAAEIAAAAAAAAAAAAAAABCAAAAAAAAAAAAAAAAQAIAAAAAQgAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAABAAgffRfBCAAAAAAAAAAAAAAAAQj76r74AfffffAAAAEACAJFlAEIAAAAAAAAAAAAAAABCIoqoIgBBBFFAAAAAQAIBEVXwQgAAAAAAAAAAAAAAAEI+iq++AH0EX3wAAABAAgIRTQBCAAAAAAAAAAAAAAAAQiCKqCQABQRSQAAAAEACB99F8EIAAAAAAAAAAAAAAABCIPvvogB999F8AAAAQAIAAAAAQgAAAAAAAAAAAAAAIEIAAAAAAAAAAAAAAABAAgAAP/xCAAAEH3333333wAAwQn9VVVAA/v7+/v7+/kACAABf+kIBAAQRQQRERRRAD/hCfyqqBwD+/oK6goKCQAIAAG/2QgfABBF998R9FEAP/EJ/VVB/AP7++rq+vrpAAgAAcA5CD+AEHwUEhEkUQA/8Qn8qB38A/v6CgoKCukACAABwDkIf4AfRffRERfRAD/hCf1B/fwD+/r76+rq6QAIAAHAOQj/oAAAAAAAAAAAAMEIAB39/AP7+gvqCgoJAAgAAcA5CP/gAAAAAAAAAAAAgQn9/f38A/v7+/v7+/kACAABwDkIAAAAAAAAAAAAAAABCAAAAAAAAAAAAAAAAQAIAAGAGQgfAAfffUX333gAAAEIAAAAAAAAAAAAAAABAAgAAQAJCP+ABFARRREQRAAAAQj6++AAARX0QAAAAAEACAAAAAEIAYBEUBFFER9EQAABCCKqAAABFQRAAAAAAQAIAAEACQj/gAfQESnxEEQAAAEIIqvgAAH1F8AAAAABAAgAAYAZCAHABF8REREfeAAHAQgiqgAAARUUQAAAAAEACAABwDkI/8AAAAAAAAAAAA+BCCKr4AABFfRAAAAAAQAIAAHAOQgBwAAAAAAAAAAAH8EIAAAAAAAAAAAAAAABAAgAAcA5CP/g/+D/4P/g/+A/4QnAAAAAA/v7+/v7+/kACAABwDkIAeAB4AHgAeAB4H/xCcAAAAAD+/v7+/v6CQAIAAHAOQj/4P/g/+D/4P/g//kJwAAAAAP7+/v7+/rpAAgAAcA5CAHwAfAB8AHwAfAAAQnAAAAAA/v7+/v7+ukACAABv9kI//D/8P/w//D/8P/5CcAAAAAD+/v7+/v66QAIAAF/6QgB8AHwAfAB8AHw//kJwAAAAAP7+/v7+/oJAAgAAP/xCP/4//j/+P/4//j/+QnAAAAAA/v7+/v7+/kACAAAAAEIAAAAAAAAAAAAAAABCAAAAAAAAAAAAAAAAQAIAAAAAQgAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAABAA//////D////////////////w////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "attributes": "BwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHQ0NDQwcAAAAAAAAAAAAAAAAHAkRERAcGBgYGBgYGBwdDQ0NDBwAAAAAAAAAAAAAAAAcHBwcHBwcHBwcHBwcHB0NDQ0MHAAAAAAAAAAAAAAAAB0IEREQHBgYGBgYGBgcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBw==",
+  "note": "panel, jak ho sekvence nechá: pole ZONE prázdné a řada Vortonů smazaná. Sejmuto v okamžiku, kdy je hláška pryč a nová hra ještě nezačala – jinak by port kreslil pod sekvencí panel z rozehrané hry, včetně čísla zóny, které originál smazal."
+ },
+ "panelMessage": {
+  "at": "$A875",
+  "rows": 2,
+  "cols": 8,
+  "glyphRows": 5,
+  "screen": [
+   "$5088",
+   "$50A8"
+  ],
+  "attributeAddresses": [
+   "$5A88",
+   "$5AA8"
+  ],
+  "attribute": "$BA",
+  "bitmap": "BAQEBAcfEREf0X1BfQV99wT3BPTfRMSERH1FfUlF9xQUFPTAQEBAQAEBEQEB9xQU9BffBAQExFFRUUpEfUREfET3REdER94R0RHeAAAQAAA=",
+  "note": "LASERTRON ACTIVATED se do panelu **nesází znakovou sadou** – je to hotový obrázek: dvě znakové řádky (20 a 21) po osmi sloupcích, v každé buňce pět pixelových řádek dat a kolem nich prázdno. Bajty jdou po sloupcích, pět na buňku, a atribut $BA (bliká, červená na bílé) se zapíše celé osmici."
+ },
+ "open": [
+  "co vybírá bajt, který si sekvence zapisuje do instrukce na $A1CE (konstanty patchDuringExplosion a patchBack) – je to uvnitř kreslení, takže to rozhodne M8",
+  "jak se kreslí rozpad lodi ($A723, scénář na $A84B a vyrovnávací paměti $D90C/$E60C) – je to grafika, a ta čeká na M8",
+  "co kreslí zóny za Zone Zero ($A8D6 rozskakuje podle $8F1C na šest obsluh) – taky grafika, M2/M8",
+  "zvuky sekvence ($9B2C, $9B5B, $A414) – M8",
+  "bodování na konci hry: SCORE se za dohrání nemění a HIGH se nepřepisuje v žádném měřeném běhu (ZADANI §4 zůstává otevřené)"
+ ]
+}

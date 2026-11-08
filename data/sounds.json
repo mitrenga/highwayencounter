@@ -1,0 +1,500 @@
+{
+ "note": "Zvuk originálu. Stroj má jednobitový beeper na bitu 4 portu $FE a žádný zvukový čip, takže zvuk je posloupnost překlopení – tady jsou popsané rutiny, které ho dělají, a jejich parametry. Nic se nevzorkuje.",
+ "source": "tools/dumpsound.py, build/gameplay.z80",
+ "cpuHz": 3500000,
+ "speakerBit": 16,
+ "portValues": [
+  "$00",
+  "$18"
+ ],
+ "music": {
+  "has": false,
+  "outInstructions": [
+   "$9B34",
+   "$9B60",
+   "$B209"
+  ],
+  "quietPasses": 105,
+  "quietPortWrites": 0,
+  "passesWithSound": 15,
+  "note": "V celém obrazu 48 K jsou tři instrukce OUT ($FE),A a všechny leží uvnitř generátorů zvuku. Žádná se nevolá z přerušení, takže hudba běžet nemůže; naměřeno, že v průchodech s nulovou žádankou $8F15 nesáhne hra na port ani jednou."
+ },
+ "border": {
+  "value": 0,
+  "colour": "black",
+  "portWrites": 185322,
+  "seen": {
+   "$00": [
+    "demonstrace",
+    "konec hry",
+    "menu"
+   ]
+  },
+  "note": "Border se nikde nenastavuje zvlášť – jediné zápisy na $FE dělají generátory zvuku a posílají $18 a $00, tedy bity 0-2 nulové. Border je černý po celou hru."
+ },
+ "flag": {
+  "at": "$8F15",
+  "dispatch": "$9AEF",
+  "priority": [
+   1,
+   6,
+   3,
+   7,
+   4
+  ],
+  "note": "$8F15 je žádanka: hra si v ní během průchodu nastaví bit a na konci průchodu rozskok $9AEF vezme první bit v pořadí priority, přehraje jeho efekt **synchronně** (hlavní smyčka na něj čeká) a žádanku vynuluje. Tentýž bajt zná M3 jako příznak nárazu – bit 4 je jeho zvuk."
+ },
+ "random": {
+  "at": "$A270",
+  "seed": "$5C76",
+  "mul": 254,
+  "add": 253,
+  "mod": 65537,
+  "note": "týž generátor jako v data/enemies.json. Šum si z něj hodí právě jednou za segment, tedy `notes` tahů za efekt – tím je zavřená otázka §16, kolik tahů spotřebuje zvuk."
+ },
+ "generators": {
+  "noise": {
+   "initB": 2,
+   "initL": 2,
+   "tPerOut": 24,
+   "tStep": 39,
+   "tDraw": 259,
+   "at": "$9B2C",
+   "draws": "notes",
+   "note": "E segmentů; segment se překlopí L-krát a mezi překlopeními čeká B průchodů smyčkou OUT. Na konci segmentu si L a B hodí z generátoru náhody: L = (dolní bajt AND maskToggles)+1, B = (horní bajt AND/OR maskDelay)+1; B = 0 znamená 256. Doba mezi překlopeními je tPerOut*B + tStep, přes hod tPerOut*B + tDraw (+1, když generátor nechal přenos)."
+  },
+  "tone": {
+   "tPerOut": 24,
+   "tStep": 22,
+   "tNote": 53,
+   "at": "$9B5B",
+   "note": "E tónů po L překlopeních; prodleva D se po každém tónu zmenší o `subtract` bajtově. Doba mezi překlopeními je tPerOut*D + tStep, mezi tóny tPerOut*D + tNote."
+  },
+  "click": {
+   "out": 11,
+   "inc": 4,
+   "jrTaken": 12,
+   "jrNot": 7,
+   "reloadD": 11,
+   "reloadE": 15,
+   "djnz": 13,
+   "djnzEnd": 8,
+   "decC": 4,
+   "at": "$B203",
+   "note": "Menu. H je počet vnějších kol po 256 průchodech, L perioda: čítač D běží od L, čítač E od L-1, a při přetečení každý překlopí beeper – dva čtvercové průběhy o jeden T-stav periody vedle sebe."
+  }
+ },
+ "sounds": [
+  {
+   "bit": 1,
+   "generator": "tone",
+   "toggles": 4,
+   "delay": 70,
+   "notes": 8,
+   "subtract": 250,
+   "draws": 0,
+   "measuredT": 70918,
+   "reference": {
+    "seed": 4660,
+    "seedAfter": 4660,
+    "pulses": [
+     1702,
+     1702,
+     1702,
+     1733,
+     1846,
+     1846,
+     1846,
+     1877,
+     1990,
+     1990,
+     1990,
+     2021,
+     2134,
+     2134,
+     2134,
+     2165,
+     2278,
+     2278,
+     2278,
+     2309,
+     2422,
+     2422,
+     2422,
+     2453,
+     2566,
+     2566,
+     2566,
+     2597,
+     2710,
+     2710,
+     2710,
+     2741
+    ],
+    "note": "délky pulzů v T-stavech mezi překlopeními beeperu; první pulz začíná prvním OUT"
+   },
+   "triggers": [
+    "$A1F6"
+   ],
+   "name": "fire"
+  },
+  {
+   "bit": 6,
+   "generator": "noise",
+   "maskToggles": 5,
+   "maskDelay": 7,
+   "notes": 9,
+   "maskOp": "or",
+   "draws": 9,
+   "measuredT": 75141,
+   "reference": {
+    "seed": 4660,
+    "seedAfter": 10936,
+    "pulses": [
+     87,
+     319,
+     615,
+     847,
+     2535,
+     2535,
+     2535,
+     2535,
+     2535,
+     2767,
+     999,
+     999,
+     999,
+     999,
+     999,
+     1231,
+     20323,
+     6183,
+     6183,
+     6183,
+     6183,
+     6415
+    ],
+    "note": "délky pulzů v T-stavech mezi překlopeními beeperu; první pulz začíná prvním OUT"
+   },
+   "triggers": [
+    "$9D0B",
+    "$9F4F",
+    "$9FDA",
+    "$A62F"
+   ],
+   "name": "destroy"
+  },
+  {
+   "bit": 3,
+   "generator": "noise",
+   "maskToggles": 10,
+   "maskDelay": 63,
+   "notes": 8,
+   "maskOp": "and",
+   "draws": 8,
+   "measuredT": 18740,
+   "reference": {
+    "seed": 4660,
+    "seedAfter": 64805,
+    "pulses": [
+     87,
+     319,
+     447,
+     447,
+     1558,
+     879,
+     1966,
+     855,
+     855,
+     855,
+     855,
+     855,
+     855,
+     855,
+     1390,
+     303,
+     2892,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     207,
+     439
+    ],
+    "note": "délky pulzů v T-stavech mezi překlopeními beeperu; první pulz začíná prvním OUT"
+   },
+   "triggers": [
+    "$9D06",
+    "$9F16",
+    "$9F6C"
+   ],
+   "name": "blast"
+  },
+  {
+   "bit": 7,
+   "generator": "noise",
+   "maskToggles": 2,
+   "maskDelay": 204,
+   "notes": 12,
+   "maskOp": "and",
+   "draws": 12,
+   "measuredT": 49480,
+   "reference": {
+    "seed": 4660,
+    "seedAfter": 39864,
+    "pulses": [
+     87,
+     319,
+     63,
+     63,
+     1894,
+     1599,
+     5453,
+     3327,
+     12372,
+     4767,
+     12276,
+     1599,
+     5486
+    ],
+    "note": "délky pulzů v T-stavech mezi překlopeními beeperu; první pulz začíná prvním OUT"
+   },
+   "triggers": [
+    "$9D01",
+    "$9FA1",
+    "$9FB0"
+   ],
+   "name": "crash"
+  },
+  {
+   "bit": 4,
+   "generator": "tone",
+   "toggles": 5,
+   "delay": 30,
+   "notes": 6,
+   "subtract": 50,
+   "draws": 0,
+   "measuredT": 86224,
+   "reference": {
+    "seed": 4660,
+    "seedAfter": 4660,
+    "pulses": [
+     742,
+     742,
+     742,
+     742,
+     6459,
+     5686,
+     5686,
+     5686,
+     10203,
+     4486,
+     4486,
+     4486,
+     7803,
+     3286,
+     3286,
+     3286,
+     5403,
+     2086,
+     2086,
+     2086,
+     3003,
+     886,
+     886,
+     886,
+     917
+    ],
+    "note": "délky pulzů v T-stavech mezi překlopeními beeperu; první pulz začíná prvním OUT"
+   },
+   "triggers": [
+    "$9EE5",
+    "$9EF0"
+   ],
+   "name": "bump"
+  }
+ ],
+ "dying": {
+  "at": "$9CF2",
+  "boundary": 7,
+  "familyZero": 6,
+  "familyBelow": 3,
+  "familyAbove": 7,
+  "note": "Zanikající záznam si o zvuk řekne **v každém průchodu** své animace zániku, ne jen na jejím začátku – naměřeno nástrojem tools/tracesound.py. Který zvuk to je, rozhoduje rodina: 0 je jeden, 1 až boundary-1 druhý, boundary a výš třetí."
+ },
+ "menu": [
+  {
+   "at": "$B0E4",
+   "hl": "$785A",
+   "count": 120,
+   "period": 90,
+   "what": "menu se otevřelo",
+   "toggles": 367,
+   "tStates": 1724575
+  },
+  {
+   "at": "$B179",
+   "hl": "$646E",
+   "count": 100,
+   "period": 110,
+   "what": "volba 6 DEMONSTRATION",
+   "toggles": 348,
+   "tStates": 1437485
+  },
+  {
+   "at": "$B189",
+   "hl": "$54A0",
+   "count": 84,
+   "period": 160,
+   "what": "volba 7 START GAME",
+   "toggles": 441,
+   "tStates": 1208697
+  },
+  {
+   "at": "$B192",
+   "hl": "$C801",
+   "count": 200,
+   "period": 1,
+   "what": "hra skončila a vrátila se do menu",
+   "toggles": 400,
+   "tStates": 2872595
+  },
+  {
+   "at": "$B1B9",
+   "hl": "$785A",
+   "count": 120,
+   "period": 90,
+   "what": "volba 5 INFORMATION",
+   "toggles": 367,
+   "tStates": 1724575
+  },
+  {
+   "at": "$B1F5",
+   "hl": "$1E78",
+   "count": 30,
+   "period": 120,
+   "what": "volba ovládání 1 až 4 – HL podle zvolené položky (1 KEYBOARD)",
+   "toggles": 113,
+   "tStates": 431301
+  },
+  {
+   "at": "$B1F5",
+   "hl": "$2080",
+   "count": 32,
+   "period": 128,
+   "what": "volba ovládání 1 až 4 – HL podle zvolené položky (2 KEMPSTON)",
+   "toggles": 127,
+   "tStates": 460113
+  },
+  {
+   "at": "$B1F5",
+   "hl": "$228E",
+   "count": 34,
+   "period": 142,
+   "what": "volba ovládání 1 až 4 – HL podle zvolené položky (3 INTERFACE 2)",
+   "toggles": 152,
+   "tStates": 488999
+  },
+  {
+   "at": "$B1F5",
+   "hl": "$269C",
+   "count": 38,
+   "period": 156,
+   "what": "volba ovládání 1 až 4 – HL podle zvolené položky (4 CURSOR)",
+   "toggles": 194,
+   "tStates": 546723
+  }
+ ],
+ "triggers": [
+  {
+   "at": "$9D01",
+   "bit": 7,
+   "what": "srážka s objektem rodiny 7 a vyšší (rozskok podle rodiny na $9CF2)"
+  },
+  {
+   "at": "$9D06",
+   "bit": 3,
+   "what": "srážka s objektem rodiny 1 až 6"
+  },
+  {
+   "at": "$9D0B",
+   "bit": 6,
+   "what": "srážka s objektem rodiny 0"
+  },
+  {
+   "at": "$9EE5",
+   "bit": 4,
+   "what": "náraz do rodiny 1"
+  },
+  {
+   "at": "$9EF0",
+   "bit": 4,
+   "what": "náraz do rodiny 0, když nehoří časovač plynu $8F1D (§13)"
+  },
+  {
+   "at": "$9F16",
+   "bit": 3,
+   "what": "zánik s bliknutím barvy (25 kroků $A414) – větev, ve které záznam mizí ze silnice"
+  },
+  {
+   "at": "$9F4F",
+   "bit": 6,
+   "what": "záznam začíná umírat: druh $80 a bit 7 rychlosti (§16)"
+  },
+  {
+   "at": "$9F6C",
+   "bit": 3,
+   "what": "zánik s bliknutím barvy – druhá větev téhož, přes kontrolu bitu 7 druhu"
+  },
+  {
+   "at": "$9FA1",
+   "bit": 7,
+   "what": "zánik, ve kterém se druh posunul o dva a nepřetekl"
+  },
+  {
+   "at": "$9FB0",
+   "bit": 7,
+   "what": "zánik, ve kterém druh přetekl a záznam se nabíjí na $80"
+  },
+  {
+   "at": "$9FDA",
+   "bit": 6,
+   "what": "zánik rodiny 5 (mina), která se ze silnice neodstraňuje"
+  },
+  {
+   "at": "$A1F6",
+   "bit": 1,
+   "what": "výstřel: FIRE v $8F14, volná hlaveň, ubere se dílek POWER"
+  },
+  {
+   "at": "$A62F",
+   "bit": 6,
+   "what": "koncová sekvence: konvoj odchází (M7, $A617..)"
+  }
+ ],
+ "power": {
+  "at": "$8F18",
+  "spend": "$A1EF",
+  "refill": "$A10B",
+  "attributeBase": "$5A00",
+  "full": "$44",
+  "empty": "$00",
+  "note": "POWER je zásobník výstřelů, ne energie: $8F18 je dolní bajt adresy v atributech, výstřel ho o jedna sníží a do buňky zapíše $00, a když výstřel dojede, $A10B ho zvýší a zapíše $44. Vypadlo to z okolí zvuku výstřelu a je to odpověď na otázku otevřenou od M6."
+ },
+ "verification": {
+  "plays": 120,
+  "toggles": 3220,
+  "differences": 0,
+  "menuToggles": 2142,
+  "menuDifferences": 0,
+  "note": "Model každého generátoru je tady napsaný po instrukcích a přehraný proti originálu v simulátoru: porovnává se každé překlopení bitu 4 portu $FE na T-stav přesně, a u šumu i semínko, které po efektu zůstalo."
+ },
+ "open": [
+  "které herní jevy patří k trigger adresám $9F4F, $9FA1, $9FB0 a $9FDA – bit je změřený, ale který druh zániku to je, ukáže až matchsound",
+  "zvuk kreslení: $AAE4 tahá z téhož generátoru náhody jako šum (§16), a to je kreslení, tedy M2"
+ ]
+}

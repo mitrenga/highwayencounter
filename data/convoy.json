@@ -1,0 +1,327 @@
+{
+ "note": "Konvoj – čtyři automatické Vortony ($1070) a Lasertron ($0910) – odměřený na běžícím originálu (tools/dumpconvoy.py). Souřadnice, směry i jeden krok jsou tytéž jednotky jako v data/physics.json a data/objects.json: jeden krok je jeden průchod hlavní smyčkou hry.",
+ "source": "tools/dumpconvoy.py, build/gameplay.z80",
+ "measuredOn": {
+  "runs": 22,
+  "steps": 15200,
+  "convoyPasses": 75778,
+  "blockingDecisions": 75778
+ },
+ "classes": {
+  "vorton": 4208,
+  "lasertron": 2320
+ },
+ "start": {
+  "convoy": [
+   {
+    "slot": 1,
+    "cls": 4208,
+    "x": 36,
+    "y": 202,
+    "dir": 0,
+    "speed": 1,
+    "phase": 12,
+    "kind": 13
+   },
+   {
+    "slot": 2,
+    "cls": 4208,
+    "x": 36,
+    "y": 210,
+    "dir": 0,
+    "speed": 1,
+    "phase": 12,
+    "kind": 13
+   },
+   {
+    "slot": 3,
+    "cls": 4208,
+    "x": 36,
+    "y": 218,
+    "dir": 0,
+    "speed": 1,
+    "phase": 12,
+    "kind": 13
+   },
+   {
+    "slot": 4,
+    "cls": 4208,
+    "x": 36,
+    "y": 226,
+    "dir": 0,
+    "speed": 1,
+    "phase": 12,
+    "kind": 13
+   },
+   {
+    "slot": 5,
+    "cls": 2320,
+    "x": 36,
+    "y": 234,
+    "dir": 0,
+    "speed": 0,
+    "phase": 12,
+    "kind": 13
+   }
+  ],
+  "gaps": [
+   8,
+   8,
+   8,
+   8
+  ],
+  "player": {
+   "x": 36,
+   "y": 242
+  },
+  "note": "sestava, se kterou hra začíná: čtyři automatické Vortony v jedné řadě za sebou, Lasertron před nimi a řízený Vorton ještě před ním. Jediná část konvoje, která se z pravidla neodvodí – proto je tady, změřená z tabulky objektů v prvním průchodu rozehrané hry."
+ },
+ "motion": {
+  "dir": [
+   0
+  ],
+  "speed": 1,
+  "speedByteSeen": [
+   0,
+   1
+  ],
+  "moveHistogram": {
+   "1": 16306
+  },
+  "stepPerPass": [
+   [
+    0,
+    2
+   ]
+  ],
+  "turns": [
+   0
+  ],
+  "phasePerMove": [
+   4
+  ],
+  "note": "konvoj **nezatáčí a nezrychluje**: každý jeho člen jede pořád směrem 0 (podél silnice dopředu) rychlostí 1, tedy o 2 za průchod, a fáze animace se mu při každém povedeném kroku posune o 4 – přesně jako řízenému Vortonovi (data/physics.json). Tlačení Lasertronu není zvláštní pravidlo: Lasertron jede sám a Vortoni se za ním jen nemají kam vejít."
+ },
+ "collision": {
+  "box": {
+   "x": 7,
+   "y": 7
+  },
+  "fits": [
+   [
+    7,
+    7
+   ]
+  ],
+  "unexplained": 2401,
+  "unexplainedPercent": 3.168,
+  "unexplainedStops": [
+   {
+    "slot": 2,
+    "y": 688,
+    "passes": 24
+   },
+   {
+    "slot": 2,
+    "y": 696,
+    "passes": 127
+   },
+   {
+    "slot": 3,
+    "y": 698,
+    "passes": 24
+   },
+   {
+    "slot": 3,
+    "y": 706,
+    "passes": 127
+   },
+   {
+    "slot": 4,
+    "y": 692,
+    "passes": 135
+   },
+   {
+    "slot": 4,
+    "y": 708,
+    "passes": 24
+   },
+   {
+    "slot": 4,
+    "y": 716,
+    "passes": 127
+   },
+   {
+    "slot": 5,
+    "y": 688,
+    "passes": 1311
+   },
+   {
+    "slot": 5,
+    "y": 694,
+    "passes": 35
+   },
+   {
+    "slot": 5,
+    "y": 702,
+    "passes": 136
+   },
+   {
+    "slot": 5,
+    "y": 718,
+    "passes": 25
+   },
+   {
+    "slot": 5,
+    "y": 726,
+    "passes": 128
+   },
+   {
+    "slot": 5,
+    "y": 864,
+    "passes": 178
+   }
+  ],
+  "sameAsObjects": true,
+  "objectsBox": {
+   "x": 7,
+   "y": 7
+  },
+  "tableOrder": true,
+  "tableOrderMismatches": {
+   "ordered": 0,
+   "atStartOfPass": 2740
+  },
+  "note": "krok konvoje se zahodí přesně tehdy, když v cíli stojí objekt v téže krabici, jakou M4 naměřila pro řízeného Vortona – měřeno znovu a nezávisle, vyšla stejná. Rozhoduje se **v pořadí tabulky**: slot vidí ty před sebou už posunuté a ty za sebou ještě ne; se stavem na začátku průchodu pravidlo nesedí."
+ },
+ "speedByte": {
+  "moved": 1,
+  "blockedByConvoy": 1,
+  "blockedByOther": 0,
+  "histogram": {
+   "konvoj": {
+    "1": 46964
+   },
+   "podle druhu $1070": {
+    "1": 35327
+   },
+   "podle druhu $0910": {
+    "1": 11637
+   },
+   "cizí": {
+    "0": 10107
+   },
+   "podle druhu $0000": {
+    "0": 1000
+   },
+   "pohnul se": {
+    "1": 16306
+   },
+   "podle druhu $1A68": {
+    "0": 8906
+   },
+   "podle druhu $0228": {
+    "0": 47
+   },
+   "nic v cestě": {
+    "0": 1813,
+    "1": 588
+   },
+   "podle druhu $18E8": {
+    "0": 154
+   }
+  },
+  "note": "zablokovaný člen konvoje si v `+8` nechá jedničku, když ho zastavil jiný člen konvoje, a dostane nulu, když ho zastavilo cokoli jiného (hráč, předmět). Na pohyb to vliv nemá – jede se pořád o 2 – je to stav pro kreslení."
+ },
+ "pushes": {
+  "anything": false,
+  "histogram": {
+   "$1A68 stál": 8878,
+   "$1A68 rozjel se směrem konvoje": 4,
+   "$1A68 strčil ho někdo jiný": 7,
+   "$1A68 dojížděl vlastní setrvačností": 5,
+   "$0228 stál": 16,
+   "$0228 dojížděl vlastní setrvačností": 31,
+   "$1A68 přepsán obsahem nové zóny": 6,
+   "$18E8 stál": 153
+  },
+  "note": "konvoj **nestrká**: do čeho narazí, o to se zastaví a stojí, dokud se cesta neuvolní. Předmět, který se pod zastaveným konvojem přesto pohnul, buď dojížděl po dřívějším strčení (M4), nebo ho v tomtéž průchodu strčil řízený Vorton či výstřel, nebo mu záznam přepsal obsah nové zóny (M2). Ani jeden se nerozjel **rychlostí, kterou jezdí konvoj**: ty čtyři, co vyrazily jeho směrem, měly v záznamu rychlost 2, tedy půlku zásahu výstřelem. Nepřátelé ($0228) se hýbou sami, ti do statistiky nepatří (M6)."
+ },
+ "lane": {
+  "x": [
+   36
+  ],
+  "road": {
+   "minX": 0,
+   "maxX": 72
+  },
+  "clearanceNeeded": 15,
+  "note": "Lasertron i automatické Vortony stojí pořád v `x = [36]`, tedy na středu silnice (0..72), a nikdy z něj neuhnou – proto YS 19 radí „srovnat středovou čáru s drážkou na zádech Vortona\". Průjezd, který konvoj potřebuje, je tím daný: nic nesmí stát blíž než 7 napříč silnicí, tedy volný pruh 15 jednotek široký."
+ },
+ "takeover": {
+  "events": [
+   {
+    "run": "long1",
+    "step": 995,
+    "from": 0,
+    "animation": 12,
+    "blankSteps": 1,
+    "alive": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "to": 1,
+    "tookLowest": true
+   },
+   {
+    "run": "long1",
+    "step": 1186,
+    "from": 1,
+    "animation": 12,
+    "blankSteps": 1,
+    "alive": [
+     2,
+     3,
+     4
+    ],
+    "to": 2,
+    "tookLowest": true
+   },
+   {
+    "run": "long3",
+    "step": 1161,
+    "from": 0,
+    "animation": 12,
+    "blankSteps": 1,
+    "alive": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "to": 1,
+    "tookLowest": true
+   }
+  ],
+  "animationSteps": {
+   "12": 3
+  },
+  "blankHistogram": {
+   "1": 3
+  },
+  "takesLowestSlot": true,
+  "blankSteps": [
+   1
+  ],
+  "takesClass": 0,
+  "note": "když je řízený Vorton zničen, jeho záznam projde animací zániku (druh se posouvá po osmi, rychlost má horní bit – to je M6), pak z tabulky zmizí, a **záznam s nejnižším slotem, který je pořád automatický Vorton, dostane druh 0** a od toho průchodu poslouchá klávesy. Hráč tedy nezačíná znovu na startu: přebírá Vortona tam, kde právě je, i s jeho pozicí a fází animace."
+ },
+ "open": [
+  "čelo konvoje se občas zastaví, i když má před sebou volno – ve všech naměřených případech daleko před kamerou, a tři nezávislé běhy se zastaví v tomtéž y. Co ho zastavilo, v tabulce objektů není: obsah zóny, do které konvoj vjel, se ještě nenačetl (M2). Je to 3.17 % naměřených průchodů konvoje.",
+  "co se s konvojem stane v Zone Zero (koncová sekvence, M7)",
+  "jak se automatický Vorton chová, když na něj zaútočí nepřítel – zánik samotný je M6",
+  "jestli konvoj po druhém průchodu (M7) jede jinak"
+ ]
+}
