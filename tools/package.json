@@ -1,0 +1,5 @@
+{
+  "//": "Keeps tools/**/*.js as CommonJS: these offline tools use require() and predate the root package.json that marks the repository as ES modules. New tools here are written as *.mjs; converting the old ones to ESM retires this file.",
+  "private": true,
+  "type": "commonjs"
+}
